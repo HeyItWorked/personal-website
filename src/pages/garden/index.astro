@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badge from '../../components/Badge.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getCollection } from 'astro:content';
+
+const allNotes = await getCollection('garden');
+
+// Sort by maturity: evergreen > budding > seedling
+const maturityOrder = { evergreen: 0, budding: 1, seedling: 2 };
+const notes = allNotes.sort((a, b) => {
+  return maturityOrder[a.data.maturity] - maturityOrder[b.data.maturity];
+});
+
+const maturityEmojis = {
+  seedling: '🌱',
+  budding: '🌿',
+  evergreen: '🌳'
+};
+
+const maturityDescriptions = {
+  seedling: 'New ideas, rough notes, work in progress',
+  budding: 'Developing thoughts, partially formed',
+  evergreen: 'Mature, well-developed, regularly updated'
+};
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
+  });
+}
+---
+
+<BaseLayout 
+  title="Digital Garden | Liam Nguyen"
+  description="A collection of my evolving thoughts, notes, and ideas - organized by maturity rather than date."
+  section="personal"
+>
+  <div class="container-custom">
+    <Breadcrumb items={[
+      { label: 'Home', href: '/' },
+      { label: 'Garden' }
+    ]} />
+    
+    {/* Header */}
+    <header class="py-12 lg:py-16 max-w-3xl">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6">
+        Digital Garden 🌱
+      </h1>
+      <p class="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed mb-6">
+        Welcome to my digital garden - a collection of notes, ideas, and half-formed thoughts that I'm cultivating over time. 
+        Unlike a traditional blog, these notes evolve and grow.
+      </p>
+      <p class="text-[var(--color-text-secondary)]">
+        <a href="#about" class="text-[var(--color-primary)]">Learn more about digital gardens →</a>
+      </p>
+    </header>
+
+    {/* Maturity Legend */}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+      {(['evergreen', 'budding', 'seedling'] as const).map((maturity) => (
+        <div class="card text-center">
+          <div class="text-3xl mb-2">{maturityEmojis[maturity]}</div>
+          <h3 class="font-semibold text-[var(--color-text)] capitalize mb-1">{maturity}</h3>
+          <p class="text-sm text-[var(--color-text-secondary)]">{maturityDescriptions[maturity]}</p>
+        </div>
+      ))}
+    </div>
+
+    {/* Notes List */}
+    <section class="pb-16 lg:pb-24">
+      <div class="space-y-6">
+        {notes.map((note) => (
+          <article class="card group">
+            <div class="flex items-start gap-4">
+              {/* Maturity Indicator */}
+              <div class="text-2xl flex-shrink-0" title={`Maturity: ${note.data.maturity}`}>
+                {maturityEmojis[note.data.maturity]}
+              </div>
+              
+              {/* Content */}
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-2">
+                  <h2 class="text-xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors">
+                    <a href={`/garden/${note.slug}`}>
+                      {note.data.title}
+                    </a>
+                  </h2>
+                  <Badge 
+                    text={note.data.maturity} 
+                    variant={note.data.maturity === 'evergreen' ? 'primary' : note.data.maturity === 'budding' ? 'accent' : 'default'} 
+                  />
+                </div>
+                
+                <p class="text-[var(--color-text-secondary)] mb-3">
+                  {note.data.description}
+                </p>
+                
+                <div class="flex flex-wrap gap-2">
+                  {note.data.tags.map((tag) => (
+                    <span class="text-xs text-[var(--color-text-muted)]">#{tag}</span>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Arrow */}
+              <div class="hidden md:flex items-center text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] transition-colors flex-shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+      
+      {notes.length === 0 && (
+        <div class="text-center py-16">
+          <p class="text-[var(--color-text-secondary)]">No notes yet. Planting seeds soon!</p>
+        </div>
+      )}
+    </section>
+
+    {/* About Digital Gardens */}
+    <section id="about" class="py-16 border-t border-[var(--color-border)]">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl font-bold text-[var(--color-text)] mb-4">
+          What is a Digital Garden?
+        </h2>
+        <div class="space-y-4 text-[var(--color-text-secondary)]">
+          <p>
+            Unlike a traditional blog where posts are published and frozen in time, a digital garden is a space for 
+            <strong class="text-[var(--color-text)]">growing ideas</strong>. Notes here range from rough seedlings 
+            (fleeting thoughts) to budding ideas (developing concepts) to evergreen notes (well-developed, lasting content).
+          </p>
+          <p>
+            This approach emphasizes <strong class="text-[var(--color-text)]">learning in public</strong> and the value of 
+            sharing work at various stages of completion. It's okay for ideas to be imperfect - that's how they grow.
+          </p>
+          <p>
+            Inspired by the works of Maggie Appleton, Andy Matuschak, and the broader digital gardening movement.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

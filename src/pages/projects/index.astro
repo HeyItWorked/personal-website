@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+
+// Sort by featured first, then by title
+const projects = allProjects.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return a.data.title.localeCompare(b.data.title);
+});
+
+const professionalProjects = projects.filter((p) => p.data.type === 'professional');
+const personalProjects = projects.filter((p) => p.data.type === 'personal');
+---
+
+<BaseLayout 
+  title="Projects | Liam Nguyen"
+  description="A collection of projects I've built - from professional work to personal experiments."
+  section="personal"
+>
+  <div class="container-custom">
+    <Breadcrumb items={[
+      { label: 'Home', href: '/' },
+      { label: 'Projects' }
+    ]} />
+    
+    {/* Header */}
+    <header class="py-12 lg:py-16">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6">
+        Projects
+      </h1>
+      <p class="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl">
+        A collection of things I've built - from professional work at companies to personal experiments 
+        and open source contributions. Each project taught me something new.
+      </p>
+    </header>
+
+    {/* Tabs */}
+    <div class="border-b border-[var(--color-border)] mb-12">
+      <nav class="flex gap-8" aria-label="Project filters">
+        <button 
+          class="project-tab active pb-4 text-sm font-medium border-b-2 border-[var(--color-primary)] text-[var(--color-primary)]"
+          data-filter="all"
+        >
+          All ({projects.length})
+        </button>
+        <button 
+          class="project-tab pb-4 text-sm font-medium border-b-2 border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors"
+          data-filter="professional"
+        >
+          Professional ({professionalProjects.length})
+        </button>
+        <button 
+          class="project-tab pb-4 text-sm font-medium border-b-2 border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors"
+          data-filter="personal"
+        >
+          Personal ({personalProjects.length})
+        </button>
+      </nav>
+    </div>
+
+    {/* Projects Grid */}
+    <section class="pb-16 lg:pb-24">
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project) => (
+          <div class="project-item" data-type={project.data.type}>
+            <ProjectCard 
+              title={project.data.title}
+              description={project.data.description}
+              techStack={project.data.techStack}
+              slug={project.slug}
+              liveUrl={project.data.liveUrl}
+              repoUrl={project.data.repoUrl}
+            />
+          </div>
+        ))}
+      </div>
+      
+      {projects.length === 0 && (
+        <div class="text-center py-16">
+          <p class="text-[var(--color-text-secondary)]">No projects yet. Check back soon!</p>
+        </div>
+      )}
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const tabs = document.querySelectorAll('.project-tab');
+  const projectItems = document.querySelectorAll('.project-item');
+  
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const filter = tab.getAttribute('data-filter');
+      
+      // Update active tab styling
+      tabs.forEach((t) => {
+        t.classList.remove('active', 'border-[var(--color-primary)]', 'text-[var(--color-primary)]');
+        t.classList.add('border-transparent', 'text-[var(--color-text-secondary)]');
+      });
+      tab.classList.add('active', 'border-[var(--color-primary)]', 'text-[var(--color-primary)]');
+      tab.classList.remove('border-transparent', 'text-[var(--color-text-secondary)]');
+      
+      // Filter projects
+      projectItems.forEach((item) => {
+        const type = item.getAttribute('data-type');
+        if (filter === 'all' || type === filter) {
+          (item as HTMLElement).style.display = 'block';
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,132 @@
+---
+title: 'Lessons from Building Distributed Systems'
+description: 'Key takeaways from years of working with microservices and event-driven architectures.'
+pubDate: 2026-01-20
+tags: ['architecture', 'distributed-systems', 'backend']
+draft: false
+---
+
+After several years of building and maintaining distributed systems, I've collected a set of lessons that I wish I knew when I started. Some were learned the hard way, others through careful study of those who came before me.
+
+## 1. Start Simple, Then Distribute
+
+The biggest mistake I see teams make is distributing too early. A well-architected monolith will outperform a poorly designed distributed system every time.
+
+> "Distributed systems are hard. Don't distribute unless you have to." - Martin Fowler
+
+Start with a modular monolith:
+- Clear module boundaries
+- Well-defined interfaces
+- Independent deployability within the monolith
+
+Only extract to services when:
+- A module has different scaling requirements
+- Teams need independent deployment cycles
+- Technology constraints force the split
+
+## 2. Design for Failure
+
+In a distributed system, failure is not an exception - it's the default state. Network partitions happen. Services go down. Disks fill up.
+
+Key patterns to adopt:
+
+- **Circuit Breakers** - Fail fast when dependencies are unhealthy
+- **Bulkheads** - Isolate failures to prevent cascading issues
+- **Retry with Backoff** - Handle transient failures gracefully
+- **Idempotency** - Ensure retries are safe
+
+## 3. Observability is Non-Negotiable
+
+You can't debug what you can't see. In distributed systems, you need:
+
+- **Structured logging** - Correlation IDs across service boundaries
+- **Distributed tracing** - Follow requests across the system
+- **Metrics** - System health, business KPIs, error rates
+- **Alerting** - Proactive notifications, not reactive paging
+
+Invest in observability early. It's much harder to retrofit.
+
+## 4. Event-Driven != Event-Sourcing
+
+These terms are often conflated but they're different concepts:
+
+- **Event-Driven Architecture** - Services communicate via events
+- **Event Sourcing** - State is stored as a sequence of events
+
+Event-driven is a communication pattern. Event sourcing is a persistence pattern. You can have one without the other.
+
+Event sourcing adds significant complexity. Make sure you need the audit trail and temporal queries it enables before adopting it.
+
+## 5. CAP Theorem is Always in Play
+
+When networks partition, you must choose between consistency and availability. There is no magic solution.
+
+Most business systems choose availability with eventual consistency. But be intentional about this choice:
+
+- Where is strong consistency required?
+- Where can we tolerate stale data?
+- How do we handle conflicts when they occur?
+
+## 6. API Design is Product Design
+
+Your APIs are your product interfaces. Internal or external, they deserve the same care as user interfaces.
+
+Principles I follow:
+
+- **Version from day one** - Breaking changes will happen
+- **Be explicit** - Don't rely on defaults that might change
+- **Document thoroughly** - OpenAPI specs, examples, error cases
+- **Design for evolution** - Extensibility over perfection
+
+## 7. Data Ownership is Critical
+
+Every piece of data should have a single source of truth. When multiple services write to the same data, you get:
+
+- Race conditions
+- Inconsistency
+- Hard-to-debug issues
+
+Embrace domain-driven design:
+- Clear bounded contexts
+- One service owns each entity
+- Other services reference, don't duplicate
+
+## 8. Testing is Harder, Not Optional
+
+Distributed systems are notoriously hard to test:
+
+- **Unit tests** - Test business logic in isolation
+- **Integration tests** - Test service interactions
+- **Contract tests** - Verify API compatibility
+- **Chaos engineering** - Test failure scenarios in production-like environments
+
+Invest in test infrastructure. It's expensive but necessary.
+
+## 9. Conway's Law is Real
+
+> "Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations." - Melvin Conway
+
+Your architecture will mirror your org structure. Plan for it:
+
+- Cross-functional teams aligned to services
+- Clear ownership and on-call rotations
+- Communication channels that match dependencies
+
+## 10. Operational Complexity is Real Cost
+
+Distributed systems cost more to run:
+
+- More infrastructure to manage
+- More monitoring and alerting
+- More on-call burden
+- More coordination overhead
+
+Before splitting a service, calculate the operational cost. Sometimes the monolith is the right answer.
+
+## Final Thoughts
+
+Distributed systems are powerful but complex. The patterns that work at Google scale might be overkill for your use case. Always start with the problem, not the solution.
+
+Build simple systems. Distribute when necessary. Design for failure. Measure everything.
+
+Most importantly: learn continuously. This field evolves rapidly, and yesterday's best practices might be tomorrow's anti-patterns.

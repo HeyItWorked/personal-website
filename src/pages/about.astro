@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Badge from '../components/Badge.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const currentLearning = [
+  { topic: 'Rust', description: 'Systems programming and WebAssembly' },
+  { topic: 'Machine Learning', description: 'Practical ML for software engineers' },
+  { topic: 'Technical Writing', description: 'Better documentation and communication' },
+];
+
+const interests = [
+  'Open source software',
+  'Developer experience',
+  'Distributed systems',
+  'Mechanical keyboards',
+  'Coffee brewing',
+  'Hiking',
+  'Sci-fi books',
+  'Minimalism',
+];
+
+const personalLinks = [
+  { label: 'Blog', href: '/blog', description: 'Thoughts on software engineering' },
+  { label: 'Projects', href: '/projects', description: 'Things I have built' },
+  { label: 'Digital Garden', href: '/garden', description: 'Growing ideas and notes' },
+];
+---
+
+<BaseLayout 
+  title="About | Liam Nguyen"
+  description="A bit about me, my interests, and what I am currently working on."
+  section="personal"
+>
+  <div class="container-custom">
+    <Breadcrumb items={[
+      { label: 'Home', href: '/' },
+      { label: 'About' }
+    ]} />
+    
+    {/* Hero Section */}
+    <section class="py-12 lg:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+        {/* Photo Placeholder */}
+        <div class="lg:col-span-1">
+          <div class="aspect-square rounded-2xl bg-gradient-to-br from-[var(--color-primary-light)] to-[var(--color-accent)]/20 flex items-center justify-center">
+            <div class="text-center text-[var(--color-text-muted)]">
+              <svg class="w-24 h-24 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <p class="text-sm">Photo coming soon</p>
+            </div>
+          </div>
+        </div>
+        
+        {/* Intro */}
+        <div class="lg:col-span-2">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6">
+            Hi, I'm Liam 👋
+          </h1>
+          
+          <div class="space-y-4 text-lg text-[var(--color-text-secondary)] leading-relaxed">
+            <p>
+              I'm a software engineer based in San Francisco, currently building distributed systems at TechCorp Inc. 
+              When I'm not writing code, you'll find me exploring new technologies, contributing to open source, 
+              or getting lost in a good sci-fi novel.
+            </p>
+            <p>
+              I believe in the power of technology to solve real problems, but also in the importance of 
+              building sustainable, maintainable systems. The best code is often the code you don't have to write.
+            </p>
+            <p>
+              This website is my digital home - a place to share what I'm learning, document my projects, 
+              and connect with like-minded people. Feel free to explore and reach out!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Personal Links */}
+    <section class="py-12 border-t border-[var(--color-border)]">
+      <h2 class="text-2xl font-bold text-[var(--color-text)] mb-8">
+        Explore My Work
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {personalLinks.map((link) => (
+          <a 
+            href={link.href}
+            class="card group"
+          >
+            <h3 class="text-lg font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors mb-2">
+              {link.label}
+            </h3>
+            <p class="text-sm text-[var(--color-text-secondary)]">
+              {link.description}
+            </p>
+            <div class="mt-4 flex items-center text-[var(--color-primary)] text-sm font-medium">
+              Explore
+              <svg class="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    {/* What I'm Learning */}
+    <section class="py-12 border-t border-[var(--color-border)]">
+      <h2 class="text-2xl font-bold text-[var(--color-text)] mb-8">
+        Currently Learning
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {currentLearning.map((item) => (
+          <div class="card">
+            <div class="flex items-center gap-3 mb-3">
+              <Badge text={item.topic} variant="primary" />
+            </div>
+            <p class="text-[var(--color-text-secondary)]">
+              {item.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Interests */}
+    <section class="py-12 border-t border-[var(--color-border)]">
+      <h2 class="text-2xl font-bold text-[var(--color-text)] mb-8">
+        Beyond Code
+      </h2>
+      
+      <div class="flex flex-wrap gap-3">
+        {interests.map((interest) => (
+          <span class="tag">
+            {interest}
+          </span>
+        ))}
+      </div>
+      
+      <div class="mt-8 prose-custom max-w-2xl">
+        <p class="text-[var(--color-text-secondary)]">
+          I believe that having diverse interests makes me a better engineer. Whether it's understanding 
+          the precision of coffee brewing, the problem-solving of mechanical keyboards, or the vast 
+          worlds of science fiction, these interests inform how I approach problems and stay creative.
+        </p>
+      </div>
+    </section>
+
+    {/* Random Facts */}
+    <section class="py-12 border-t border-[var(--color-border)]">
+      <h2 class="text-2xl font-bold text-[var(--color-text)] mb-8">
+        Random Facts
+      </h2>
+      
+      <ul class="space-y-3 text-[var(--color-text-secondary)]">
+        <li class="flex items-start gap-3">
+          <span class="text-[var(--color-accent)]">→</span>
+          <span>I switch between macOS and Linux depending on what I'm working on</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-[var(--color-accent)]">→</span>
+          <span>My current read: <em>Project Hail Mary</em> by Andy Weir</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-[var(--color-accent)]">→</span>
+          <span>I prefer mechanical keyboards with clicky switches (sorry, coworkers!)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-[var(--color-accent)]">→</span>
+          <span>My coffee setup: V60 pour-over with freshly ground beans</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-[var(--color-accent)]">→</span>
+          <span>I try to hike at least once a month to clear my head</span>
+        </li>
+      </ul>
+    </section>
+
+    {/* Get In Touch */}
+    <section class="py-12 border-t border-[var(--color-border)]">
+      <div class="card max-w-2xl mx-auto text-center">
+        <h2 class="text-2xl font-bold text-[var(--color-text)] mb-4">
+          Let's Connect
+        </h2>
+        <p class="text-[var(--color-text-secondary)] mb-6">
+          Whether you want to discuss a project, share book recommendations, 
+          or just say hello, I'd love to hear from you.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/contact" class="btn-primary">
+            Get in Touch
+          </a>
+          <a 
+            href="https://twitter.com/yourusername" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="btn-secondary"
+          >
+            Follow on Twitter
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

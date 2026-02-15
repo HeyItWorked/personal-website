@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badge from '../../components/Badge.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('garden');
+  return notes.map((note) => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await note.render();
+
+const maturityEmojis = {
+  seedling: '🌱',
+  budding: '🌿',
+  evergreen: '🌳'
+};
+
+const maturityDescriptions = {
+  seedling: 'New idea, rough notes, work in progress',
+  budding: 'Developing thought, partially formed',
+  evergreen: 'Mature, well-developed, regularly updated'
+};
+---
+
+<BaseLayout 
+  title={`${note.data.title} | Digital Garden`}
+  description={note.data.description}
+  section="personal"
+>
+  <article class="container-custom">
+    <Breadcrumb items={[
+      { label: 'Home', href: '/' },
+      { label: 'Garden', href: '/garden' },
+      { label: note.data.title }
+    ]} />
+    
+    {/* Header */}
+    <header class="py-8 lg:py-12 max-w-3xl">
+      {/* Maturity Banner */}
+      <div class={`inline-flex items-center gap-2 px-4 py-2 rounded-lg mb-6 ${
+        note.data.maturity === 'evergreen' 
+          ? 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-400' 
+          : note.data.maturity === 'budding'
+          ? 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-400'
+          : 'bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-400'
+      }`}>
+        <span class="text-2xl">{maturityEmojis[note.data.maturity]}</span>
+        <div>
+          <span class="text-sm font-medium capitalize">{note.data.maturity}</span>
+          <p class="text-xs opacity-80">{maturityDescriptions[note.data.maturity]}</p>
+        </div>
+      </div>
+      
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-4">
+        {note.data.title}
+      </h1>
+      
+      <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed">
+        {note.data.description}
+      </p>
+      
+      <div class="flex flex-wrap gap-2 mt-6">
+        {note.data.tags.map((tag) => (
+          <Badge text={`#${tag}`} variant="default" />
+        ))}
+      </div>
+    </header>
+
+    {/* Content */}
+    <div class="prose-custom max-w-3xl pb-12">
+      <Content />
+    </div>
+    
+    {/* Related Links */}
+    {note.data.links.length > 0 && (
+      <div class="border-t border-[var(--color-border)] py-8">
+        <h3 class="text-lg font-semibold text-[var(--color-text)] mb-4">
+          Related Links
+        </h3>
+        <ul class="space-y-2">
+          {note.data.links.map((link) => (
+            <li>
+              <a 
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors"
+              >
+                <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                {link}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+    
+    {/* Back to Garden */}
+    <div class="border-t border-[var(--color-border)] py-8">
+      <a 
+        href="/garden"
+        class="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors"
+      >
+        <svg class="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to the garden
+      </a>
+    </div>
+  </article>
+</BaseLayout>
