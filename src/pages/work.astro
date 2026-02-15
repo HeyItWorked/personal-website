@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Badge from '../components/Badge.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { getCollection } from 'astro:content';
+
+const workEntries = await getCollection('work');
+const projectEntries = await getCollection('projects', (entry) => entry.data.type === 'professional');
+
+// Sort work entries by date (most recent first)
+const sortedWork = workEntries.sort((a, b) => 
+  b.data.startDate.getTime() - a.data.startDate.getTime()
+);
+
+const skillCategories = [
+  {
+    name: 'Languages',
+    skills: ['TypeScript', 'JavaScript', 'Python', 'Java', 'Go', 'SQL']
+  },
+  {
+    name: 'Frameworks & Libraries',
+    skills: ['React', 'Node.js', 'Next.js', 'Spring Boot', 'FastAPI', 'GraphQL']
+  },
+  {
+    name: 'Tools & Platforms',
+    skills: ['Git', 'Docker', 'Kubernetes', 'Terraform', 'Jenkins', 'GitHub Actions']
+  },
+  {
+    name: 'Cloud & Infrastructure',
+    skills: ['AWS', 'GCP', 'Azure', 'PostgreSQL', 'MongoDB', 'Redis', 'Kafka']
+  }
+];
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+---
+
+<BaseLayout 
+  title="My Work | Liam Nguyen - Software Engineer"
+  description="Professional portfolio showcasing my work experience, projects, and technical skills."
+  section="professional"
+>
+  <div class="container-custom">
+    <Breadcrumb items={[
+      { label: 'Home', href: '/' },
+      { label: 'My Work' }
+    ]} />
+    
+    {/* Page Hero */}
+    <section class="py-12 lg:py-20">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6">
+          My Work
+        </h1>
+        <p class="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed">
+          A collection of my professional experience, projects I've built, and the technologies I work with. 
+          I'm passionate about building scalable systems and creating great developer experiences.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  {/* Experience Timeline */}
+  <section class="py-16 lg:py-24 bg-[var(--color-bg-secondary)]">
+    <div class="container-custom">
+      <h2 class="text-3xl md:text-4xl font-bold text-[var(--color-text)] mb-12">
+        Experience
+      </h2>
+      
+      <div class="relative">
+        {/* Timeline line */}
+        <div class="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-[var(--color-border)]"></div>
+        
+        <div class="space-y-12">
+          {sortedWork.map((entry) => (
+            <article class="relative pl-8 md:pl-20">
+              {/* Timeline dot */}
+              <div class="absolute left-0 md:left-8 top-2 w-4 h-4 rounded-full bg-[var(--color-primary)] -translate-x-1/2 border-4 border-[var(--color-bg)]"></div>
+              
+              <div class="card">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                  <div>
+                    <h3 class="text-xl font-bold text-[var(--color-text)]">{entry.data.company}</h3>
+                    <p class="text-[var(--color-primary)] font-medium">{entry.data.role}</p>
+                  </div>
+                  <div class="text-sm text-[var(--color-text-muted)]">
+                    {formatDate(entry.data.startDate)} — {entry.data.endDate ? formatDate(entry.data.endDate) : 'Present'}
+                  </div>
+                </div>
+                
+                <ul class="space-y-2 mb-4">
+                  {entry.data.achievements.map((achievement) => (
+                    <li class="flex items-start gap-2 text-[var(--color-text-secondary)]">
+                      <svg class="w-5 h-5 text-[var(--color-primary)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <div class="flex flex-wrap gap-2">
+                  {entry.data.techStack.map((tech) => (
+                    <Badge text={tech} variant="default" />
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Project Case Studies */}
+  <section class="py-16 lg:py-24">
+    <div class="container-custom">
+      <h2 class="text-3xl md:text-4xl font-bold text-[var(--color-text)] mb-4">
+        Case Studies
+      </h2>
+      <p class="text-[var(--color-text-secondary)] mb-12 max-w-2xl">
+        Detailed looks at some of the professional projects I've worked on, including the challenges faced and solutions implemented.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projectEntries.map((entry) => (
+          <ProjectCard 
+            title={entry.data.title}
+            description={entry.data.description}
+            techStack={entry.data.techStack}
+            slug={entry.slug}
+            liveUrl={entry.data.liveUrl}
+            repoUrl={entry.data.repoUrl}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Skills by Category */}
+  <section class="py-16 lg:py-24 bg-[var(--color-bg-secondary)]">
+    <div class="container-custom">
+      <h2 class="text-3xl md:text-4xl font-bold text-[var(--color-text)] mb-12">
+        Skills & Technologies
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {skillCategories.map((category) => (
+          <div class="card">
+            <h3 class="text-lg font-semibold text-[var(--color-text)] mb-4">
+              {category.name}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {category.skills.map((skill) => (
+                <Badge text={skill} variant="default" />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Resume CTA */}
+  <section class="py-16 lg:py-24">
+    <div class="container-custom">
+      <div class="card text-center max-w-2xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-[var(--color-text)] mb-4">
+          Want the full picture?
+        </h2>
+        <p class="text-[var(--color-text-secondary)] mb-6">
+          Download my resume for a complete overview of my experience, education, and skills.
+        </p>
+        <a 
+          href="/resume.pdf" 
+          class="btn-primary inline-flex"
+          download
+        >
+          <svg class="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Download Resume
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

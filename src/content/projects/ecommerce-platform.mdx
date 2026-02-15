@@ -1,0 +1,53 @@
+---
+title: 'E-commerce Platform'
+description: 'Full-stack e-commerce with real-time inventory management'
+techStack: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'Docker']
+liveUrl: 'https://example.com'
+repoUrl: 'https://github.com/example'
+featured: true
+type: 'professional'
+---
+
+## Project Overview
+
+A comprehensive e-commerce platform built for a retail client looking to modernize their online presence. The platform handles thousands of daily transactions and manages real-time inventory across multiple warehouses.
+
+## Challenges
+
+### Real-time Inventory Management
+The biggest challenge was ensuring accurate inventory counts across multiple sales channels while handling concurrent purchases. We implemented:
+
+- **Optimistic locking** for inventory items
+- **Event sourcing** to track all inventory changes
+- **Redis caching** for fast inventory lookups
+- **WebSocket connections** for real-time updates
+
+### Payment Processing
+Integrating multiple payment providers while maintaining PCI compliance required careful architecture:
+
+- Tokenized payment information
+- Idempotency keys for duplicate prevention
+- Comprehensive audit logging
+- Automated reconciliation reports
+
+## Technical Architecture
+
+```
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   React     │────▶│  Node.js API │────▶│ PostgreSQL  │
+│   Frontend  │     │              │     │   (Primary) │
+└─────────────┘     └──────────────┘     └─────────────┘
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │    Redis     │
+                    │   (Cache)    │
+                    └──────────────┘
+```
+
+## Results
+
+- 99.9% uptime over 12 months
+- Sub-200ms average response time
+- Handled Black Friday traffic (10x normal load) without issues
+- Reduced cart abandonment by 25% through performance improvements
