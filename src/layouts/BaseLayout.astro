@@ -3,6 +3,7 @@ import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -16,7 +17,7 @@ const siteUrl = Astro.site?.toString() || 'https://example.com';
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" transition:animate="none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,14 +48,17 @@ const siteUrl = Astro.site?.toString() || 'https://example.com';
     />
     
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- View Transitions for smooth page navigation -->
+    <ClientRouter />
   </head>
   <body class="min-h-screen flex flex-col antialiased">
-    <Header section={section} />
+    <Header section={section} transition:persist />
     
     <main class="flex-1">
       <slot />
     </main>
     
-    <Footer section={section} />
+    <Footer section={section} transition:persist />
   </body>
 </html>
