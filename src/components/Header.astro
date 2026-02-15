@@ -35,7 +35,7 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="sticky top-0 z-50 w-full border-b border-[var(--color-border)] bg-[var(--color-bg)]/80 backdrop-blur-md">
+<header class="sticky top-0 z-50 w-full border-b border-[var(--color-border)] bg-[var(--color-bg)]/80 backdrop-blur-md shadow-sm">
   <div class="container-custom">
     <nav class="flex h-16 items-center justify-between">
       {/* Logo / Name */}
@@ -78,7 +78,7 @@ const isActive = (href: string) => {
         >
           <svg 
             id="menu-icon" 
-            class="w-6 h-6" 
+            class="w-6 h-6 transition-transform duration-300" 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -87,7 +87,7 @@ const isActive = (href: string) => {
           </svg>
           <svg 
             id="close-icon" 
-            class="w-6 h-6 hidden" 
+            class="w-6 h-6 hidden transition-transform duration-300" 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -98,12 +98,12 @@ const isActive = (href: string) => {
       </div>
     </nav>
     
-    {/* Mobile Navigation */}
+    {/* Mobile Navigation - Smooth height animation */}
     <div 
       id="mobile-menu" 
-      class="hidden md:hidden border-t border-[var(--color-border)] pb-4"
+      class="md:hidden border-t border-[var(--color-border)] overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0"
     >
-      <div class="flex flex-col gap-1 pt-4">
+      <div class="flex flex-col gap-1 py-4">
         {navItems.map((item) => (
           <a
             href={item.href}
@@ -133,7 +133,19 @@ const isActive = (href: string) => {
       const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
       
       mobileMenuBtn.setAttribute('aria-expanded', (!isExpanded).toString());
-      mobileMenu.classList.toggle('hidden');
+      
+      // Toggle menu visibility with smooth animation
+      if (isExpanded) {
+        // Close menu
+        mobileMenu.style.maxHeight = '0';
+        mobileMenu.style.opacity = '0';
+      } else {
+        // Open menu
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileMenu.style.opacity = '1';
+      }
+      
+      // Toggle icons
       menuIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
     });
@@ -141,8 +153,24 @@ const isActive = (href: string) => {
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!mobileMenu.contains(e.target as Node) && !mobileMenuBtn.contains(e.target as Node)) {
+        const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          mobileMenu.style.maxHeight = '0';
+          mobileMenu.style.opacity = '0';
+          menuIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        }
+      }
+    });
+    
+    // Close menu on window resize if switching to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        mobileMenu.classList.add('hidden');
+        mobileMenu.style.maxHeight = '';
+        mobileMenu.style.opacity = '';
+        mobileMenu.classList.add('max-h-0', 'opacity-0');
         menuIcon.classList.remove('hidden');
         closeIcon.classList.add('hidden');
       }

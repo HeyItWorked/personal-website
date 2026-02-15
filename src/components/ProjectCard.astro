@@ -14,10 +14,13 @@ interface Props {
 const { title, description, techStack, image, liveUrl, repoUrl, slug } = Astro.props;
 ---
 
-<article class="group card flex flex-col h-full">
+<article class="group card flex flex-col h-full relative overflow-hidden border-t-2 border-transparent hover:border-t-2 hover:border-[var(--color-primary)] transition-all duration-300">
+  {/* Hover gradient background */}
+  <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/5 to-[var(--color-accent)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+  
   {/* Image */}
   {image && (
-    <a href={`/projects/${slug}`} class="block mb-4 -mx-6 -mt-6 overflow-hidden rounded-t-lg">
+    <a href={`/projects/${slug}`} class="block mb-4 -mx-6 -mt-6 overflow-hidden rounded-t-lg relative z-10">
       <img 
         src={image} 
         alt={`${title} preview`}
@@ -28,14 +31,23 @@ const { title, description, techStack, image, liveUrl, repoUrl, slug } = Astro.p
   )}
   
   {/* Content */}
-  <div class="flex-1 flex flex-col">
-    <h3 class="text-xl font-bold text-[var(--color-text)] mb-2 group-hover:text-[var(--color-primary)] transition-colors">
-      <a href={`/projects/${slug}`}>
-        {title}
-      </a>
-    </h3>
+  <div class="flex-1 flex flex-col relative z-10">
+    <div class="flex items-start justify-between gap-3">
+      <h3 class="text-2xl font-bold text-[var(--color-text)] mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+        <a href={`/projects/${slug}`}>
+          {title}
+        </a>
+      </h3>
+      
+      {/* Arrow that slides in on hover */}
+      <div class="text-[var(--color-primary)] transform translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 flex-shrink-0 mt-1">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </div>
+    </div>
     
-    <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4 flex-1">
+    <p class="text-[var(--color-text-secondary)] leading-relaxed mb-4 flex-1">
       {description}
     </p>
     
