@@ -1,0 +1,22 @@
+# Cloudflare Pages Headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  # Prevent clickjacking
+  X-Frame-Options: DENY
+  
+  # Prevent MIME sniffing
+  X-Content-Type-Options: nosniff
+  
+  # Control referrer information
+  Referrer-Policy: strict-origin-when-cross-origin
+  
+  # Limit browser features
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=()
+  
+  # Content Security Policy
+  # Allows: same-origin scripts/styles, inline scripts (Astro), Google Fonts
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+  
+  # Enforce HTTPS (HSTS) - 1 year
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
