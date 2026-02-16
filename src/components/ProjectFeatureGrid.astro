@@ -1,0 +1,29 @@
+---
+import FeatureCard from './FeatureCard.astro';
+
+interface Feature {
+  icon?: string;
+  title: string;
+  description: string;
+  variant?: 'default' | 'accent';
+}
+
+interface Props {
+  features: Feature[];
+  columns?: 2 | 3;
+}
+
+const { features, columns = 3 } = Astro.props;
+const gridCols = columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
+---
+
+<div class={`grid grid-cols-1 ${gridCols} gap-6`}>
+  {features.map((feature) => (
+    <FeatureCard
+      icon={feature.icon}
+      title={feature.title}
+      description={feature.description}
+      variant={feature.variant}
+    />
+  ))}
+</div>
