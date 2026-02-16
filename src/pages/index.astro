@@ -1,186 +1,49 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import Badge from '../components/Badge.astro';
-
-const featuredProjects = [
-  {
-    title: 'E-commerce Platform',
-    description: 'A full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard.',
-    techStack: ['React', 'Node.js', 'PostgreSQL', 'Redis'],
-    slug: 'ecommerce-platform',
-    liveUrl: 'https://example.com',
-    repoUrl: 'https://github.com',
-  },
-  {
-    title: 'Analytics Dashboard',
-    description: 'Real-time analytics dashboard with data visualization, custom reports, and automated insights.',
-    techStack: ['TypeScript', 'D3.js', 'Python', 'AWS'],
-    slug: 'analytics-dashboard',
-    liveUrl: 'https://example.com',
-  },
-  {
-    title: 'Mobile Banking App',
-    description: 'Secure mobile banking application with biometric authentication and real-time transactions.',
-    techStack: ['React Native', 'Node.js', 'MongoDB', 'Docker'],
-    slug: 'mobile-banking',
-    repoUrl: 'https://github.com',
-  },
-];
+import IntroCard from '../components/cards/IntroCard.astro';
+import TechStackCard from '../components/cards/TechStackCard.astro';
+import StatusCard from '../components/cards/StatusCard.astro';
+import ProjectCard from '../components/cards/ProjectCard.astro';
+import GitHubStatsCard from '../components/cards/GitHubStatsCard.astro';
+import SocialLinksCard from '../components/cards/SocialLinksCard.astro';
+import QuoteCard from '../components/cards/QuoteCard.astro';
 ---
 
 <BaseLayout 
-  title="Liam Nguyen | Software Engineer"
-  description="Full-stack software engineer specializing in scalable web applications and distributed systems."
-  section="professional"
+  title="Liam Nguyen | Platform Support Associate"
+  description="Platform Support Associate at athenahealth. Supporting payer clients with clinical data delivery and reporting systems."
 >
-  {/* Hero Section */}
-  <section class="relative py-16 lg:py-24 overflow-hidden">
-    <div class="container-custom">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        {/* Left: Text content */}
-        <div class="animate-fade-in">
-          <div class="flex items-center gap-2 mb-6">
-            <Badge text="Available for opportunities" variant="primary" />
-          </div>
+  <main class="relative min-h-screen overflow-hidden bg-[#020617]">
+    {/* Dot grid background */}
+    <div class="dot-grid pointer-events-none absolute inset-0 z-0" />
 
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6 leading-tight text-balance">
-            Building scalable solutions that{' '}
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]">make an impact</span>
-          </h1>
+    {/* Gradient orbs */}
+    <div
+      class="animate-pulse-glow pointer-events-none absolute -left-32 -top-32 z-0 h-[500px] w-[500px] rounded-full bg-emerald-500/20 blur-[128px]"
+      aria-hidden="true"
+    />
+    <div
+      class="animate-pulse-glow pointer-events-none absolute -bottom-32 -right-32 z-0 h-[500px] w-[500px] rounded-full bg-teal-500/20 blur-[128px]"
+      style="animation-delay: 4s;"
+      aria-hidden="true"
+    />
 
-          <p class="text-lg md:text-xl text-[var(--color-text-secondary)] mb-8 leading-relaxed">
-            I'm a software engineer with 5+ years of experience building production-ready applications.
-            I specialize in distributed systems, cloud architecture, and developer experience.
-          </p>
+    {/* Bento Grid */}
+    <section class="relative z-10 mx-auto max-w-7xl px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+      <div class="grid auto-rows-auto grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-3">
+        {/* Row 1-2: Main Intro (2x2) + Tech Stack (1x1) + Status (1x1) */}
+        <IntroCard />
+        <TechStackCard />
+        <StatusCard />
 
-          <div class="flex flex-wrap gap-4">
-            <a href="#contact" class="btn-primary">
-              Get in Touch
-              <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-            <a href="/about" class="btn-secondary">
-              More About Me
-            </a>
-          </div>
-        </div>
+        {/* Row 3: Featured Project (2x1) + GitHub Stats (1x1) + Social Links (1x1) */}
+        <ProjectCard />
+        <GitHubStatsCard />
+        <SocialLinksCard />
 
-        {/* Right: Visual element — animated code/terminal card */}
-        <div class="hidden lg:block animate-fade-in" style="animation-delay: 0.2s;">
-          <div class="relative">
-            {/* Glow effect behind the card */}
-            <div class="absolute -inset-4 bg-gradient-to-r from-[var(--color-primary)]/20 to-[var(--color-accent)]/20 rounded-2xl blur-2xl"></div>
-
-            {/* Terminal-style card */}
-            <div class="relative bg-[var(--color-bg-tertiary)] rounded-xl border border-[var(--color-border)] overflow-hidden shadow-2xl">
-              {/* Terminal header */}
-              <div class="flex items-center gap-2 px-4 py-3 bg-[var(--color-bg-secondary)] border-b border-[var(--color-border)]">
-                <div class="w-3 h-3 rounded-full bg-red-400"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-                <div class="w-3 h-3 rounded-full bg-green-400"></div>
-                <span class="ml-2 text-xs text-[var(--color-text-muted)] font-mono">~/projects</span>
-              </div>
-
-              {/* Code content */}
-              <div class="p-5 font-mono text-sm leading-relaxed">
-                <p><span class="text-[var(--color-text-muted)]">const</span> <span class="text-[var(--color-primary)]">engineer</span> = {'{'}</p>
-                <p class="pl-4"><span class="text-[var(--color-accent)]">name</span>: <span class="text-green-400">"Liam Nguyen"</span>,</p>
-                <p class="pl-4"><span class="text-[var(--color-accent)]">focus</span>: <span class="text-green-400">"Full Stack"</span>,</p>
-                <p class="pl-4"><span class="text-[var(--color-accent)]">stack</span>: [<span class="text-green-400">"TS"</span>, <span class="text-green-400">"React"</span>, <span class="text-green-400">"Node"</span>],</p>
-                <p class="pl-4"><span class="text-[var(--color-accent)]">passion</span>: <span class="text-green-400">"Building things"</span>,</p>
-                <p>{'}'};</p>
-                <p class="mt-2 text-[var(--color-text-muted)]">// Currently building cool stuff...</p>
-                <p class="mt-1"><span class="text-[var(--color-primary)]">engineer</span>.<span class="text-[var(--color-accent)]">build</span>(<span class="text-green-400">"something amazing"</span>); <span class="animate-pulse inline-block">_</span></p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Quote card fills remaining */}
+        <QuoteCard />
       </div>
-    </div>
-
-    {/* Background decorations */}
-    <div class="absolute top-0 right-0 -z-10 opacity-20 dark:opacity-10">
-      <div class="w-[500px] h-[500px] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
-    </div>
-    <div class="absolute bottom-0 left-0 -z-10 opacity-10 dark:opacity-5">
-      <div class="w-[300px] h-[300px] bg-gradient-to-tr from-[var(--color-accent)] to-[var(--color-primary)] rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
-    </div>
-  </section>
-
-  {/* Featured Projects Section */}
-  <section id="work" class="py-16 lg:py-24 bg-[var(--color-bg-secondary)]">
-    <div class="container-custom">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
-        <div>
-          <h2 class="text-3xl md:text-4xl font-bold text-[var(--color-text)] mb-4">
-            Featured Projects
-          </h2>
-          <p class="text-[var(--color-text-secondary)] max-w-xl">
-            A selection of projects I've worked on. Each one presented unique challenges and learning opportunities.
-          </p>
-        </div>
-        <a href="/projects" class="inline-flex items-center text-[var(--color-primary)] font-medium hover:text-[var(--color-accent)] transition-colors">
-          View All Projects
-          <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredProjects.map((project) => (
-          <ProjectCard {...project} />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* Skills Section */}
-  <section class="py-16 lg:py-24">
-    <div class="container-custom">
-      <h2 class="text-3xl md:text-4xl font-bold text-[var(--color-text)] mb-12 text-center">
-        Technologies I Work With
-      </h2>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {['TypeScript', 'React', 'Node.js', 'Python', 'PostgreSQL', 'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'Redis', 'MongoDB', 'Terraform'].map((tech) => (
-          <div class="card text-center py-4 hover:border-[var(--color-primary)]/30 transition-colors">
-            <span class="text-sm font-medium text-[var(--color-text-secondary)]">{tech}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* Contact Section */}
-  <section id="contact" class="py-16 lg:py-24 bg-[var(--color-bg-secondary)]">
-    <div class="container-custom">
-      <div class="max-w-2xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-[var(--color-text)] mb-4">
-          Let's Work Together
-        </h2>
-        <p class="text-[var(--color-text-secondary)] mb-8">
-          I'm currently open to new opportunities and interesting projects. 
-          Whether you're looking for a full-time engineer or need help with a specific project, I'd love to hear from you.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:hello@example.com" class="btn-primary">
-            <svg class="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            Send an Email
-          </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-            <svg class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-            LinkedIn
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </BaseLayout>

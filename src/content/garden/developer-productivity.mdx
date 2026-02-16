@@ -1,61 +1,85 @@
 ---
 title: 'Developer Productivity Systems'
-description: 'Thoughts on building effective developer workflows'
+description: 'Thoughts on building effective developer workflows and environments that actually work'
 maturity: 'budding'
 tags: ['productivity', 'developer-experience', 'tools']
 links: []
 ---
 
-Over the years I've developed various systems for staying productive as a developer. This note collects my current thinking on what works.
+import Callout from '../../components/Callout.astro';
 
-## Environment Matters
+Over the years I've developed various systems for staying productive as a developer. This note collects my current thinking on what actually works — and what doesn't.
 
-A consistent, reproducible development environment saves countless hours:
+## Environment as Code
 
-- **Dotfiles in git** - Track your configurations
-- **Dev containers** - Same environment everywhere
-- **Makefile/scripts** - Document common tasks
-- **Good defaults** - Sensible editor/terminal settings
+A consistent, reproducible development environment saves countless hours. If you can't set up a new machine in under an hour, you're losing time.
+
+<Callout type="tip" title="My Dotfiles Strategy">
+  Everything lives in git: shell configs, editor settings, aliases, and install scripts. New machine setup: `git clone && ./install.sh`
+</Callout>
+
+**Key components:**
+- **Dotfiles in git** — Track configurations, not just code
+- **Dev containers** — Same environment everywhere (especially for team projects)
+- **Makefile/scripts** — Document common tasks so you don't forget
+- **Sensible defaults** — Good editor/terminal settings out of the box
 
 ## Deep Work Blocks
 
-Coding requires sustained focus. I protect deep work time aggressively:
+Coding requires sustained focus. Context switching kills productivity.
 
-- Morning blocks for hard problems
-- Slack/email checking at set times
-- Phone in another room
-- Noise-cancelling headphones
+My current approach:
+- **Morning blocks** (2-3 hours) for hard problems
+- **Slack/email** only at 11am, 2pm, 5pm
+- **Phone stays** in another room during focus time
+- **Noise-cancelling headphones** — non-negotiable
+
+<Callout type="warning">
+  Multitasking is a lie. Studies show it takes 20+ minutes to regain deep focus after an interruption. Protect your attention.
+</Callout>
 
 ## Knowledge Management
 
-As developers, we're constantly learning:
+As developers, we're constantly learning. Without a system, knowledge leaks away.
 
-- Keep notes on what you learn
-- Build a personal wiki/digital garden
-- Document decisions and their context
-- Write about complex topics (teaching solidifies learning)
+| Approach | Pros | Cons |
+|----------|------|------|
+| Digital Garden (this site) | Public, linked thoughts | Takes time to maintain |
+| Obsidian | Fast, local, graph view | Can become a rabbit hole |
+| Plain text + git | Simple, durable | No nice UI |
+| Notion | Pretty, collaborative | Slow, proprietary |
 
-## Automation
+I'm currently using a hybrid: this digital garden for public notes, Obsidian for private thoughts, and a `notes` repo for quick snippets.
+
+## Automation Rules
 
 Automate anything you do more than twice:
 
-- Shell aliases for common commands
-- Scripts for repetitive tasks
-- CI/CD for testing and deployment
-- Templates for boilerplate
+- **Shell aliases** — `g` for `git`, `k` for `kubectl`, etc.
+- **Scripts** — Repetitive tasks become one command
+- **CI/CD** — Never manually deploy or run tests
+- **Templates** — Boilerplate for new projects
+
+<Callout type="info">
+  Time spent improving your tools pays dividends. A 5-minute task done 10 times is almost an hour. Automate it.
+</Callout>
 
 ## Tooling Investment
 
-Time spent improving your tools pays dividends:
+Learn your tools deeply:
 
-- Learn your editor deeply
-- Master your shell
-- Invest in good hardware
-- Curate your development environment
+- **Editor** — Know the shortcuts, plugins, and workflows
+- **Shell** — Master bash/zsh and scripting
+- **Git** — Beyond commit/push: rebase, bisect, reflog
+- **Hardware** — Good monitor, keyboard, chair pay for themselves
 
-## Still Exploring
+## What I'm Still Figuring Out
 
-- Time blocking vs flexible schedules
-- Note-taking systems (Obsidian, Notion, plain text)
-- How to balance learning vs doing
-- Managing context switching between projects
+- **Time blocking vs flexible schedules** — Rigidity helps focus but kills creativity
+- **Note-taking systems** — Finding the right balance between structure and speed
+- **Learning vs doing** — How much time to spend on tutorials vs building
+- **Context switching** — Managing multiple projects without losing state
+
+---
+
+*Last updated: February 2025*

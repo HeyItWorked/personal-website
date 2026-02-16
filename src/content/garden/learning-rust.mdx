@@ -1,38 +1,98 @@
 ---
 title: 'Learning Rust'
-description: 'Notes and resources as I learn Rust programming'
+description: 'Notes and resources as I learn Rust programming - from ownership to building real projects'
 maturity: 'seedling'
 tags: ['rust', 'programming', 'learning']
-links: []
+links: ['https://doc.rust-lang.org/book/', 'https://exercism.org/tracks/rust', 'https://github.com/HeyItWorked/dns-server-rust']
 ---
 
-Starting my Rust learning journey. These are rough notes that I'll refine as I go.
+import Callout from '../../components/Callout.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+
+Starting my Rust learning journey in 2025. These are living notes that I'll refine as I go from complete beginner to building real systems.
 
 ## Why Rust?
 
-- Memory safety without garbage collection
-- Zero-cost abstractions
-- Great tooling (cargo, rust-analyzer)
-- Growing ecosystem (WebAssembly, systems programming)
-- Helpful compiler error messages
+I chose Rust for a few specific reasons:
+
+- **Memory safety without GC** — Predictable performance for systems programming
+- **Zero-cost abstractions** — High-level ergonomics, low-level control
+- **WASM support** — Run in browsers at near-native speed
+- **Error messages** — The compiler actually teaches you
+
+<Callout type="info">
+  My goal isn't to become a Rust expert overnight. It's to understand systems programming concepts deeply enough to write efficient, safe code.
+</Callout>
+
+## Resources I'm Using
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6 not-prose">
+  <ResourceCard
+    title="The Rust Book"
+    description="The official guide — comprehensive and well-written"
+    href="https://doc.rust-lang.org/book/"
+    type="book"
+  />
+  <ResourceCard
+    title="Rust by Example"
+    description="Learn through runnable code samples"
+    href="https://doc.rust-lang.org/rust-by-example/"
+    type="docs"
+  />
+  <ResourceCard
+    title="Exercism Rust Track"
+    description="Hands-on practice with mentor feedback"
+    href="https://exercism.org/tracks/rust"
+    type="course"
+  />
+  <ResourceCard
+    title="rust-analyzer"
+    description="IDE support that makes learning easier"
+    href="https://rust-analyzer.github.io/"
+    type="tool"
+  />
+</div>
 
 ## Initial Impressions
 
 The borrow checker is both frustrating and enlightening. It forces you to think about ownership and lifetimes in ways other languages don't.
 
-Resources I'm using:
-- The Rust Book (official)
-- Rust by Example
-- exercism.org Rust track
+<Callout type="warning" title="Expect Frustration">
+  The first week is rough. You'll fight the compiler constantly. Then something clicks and you start *thinking* in ownership terms.
+</Callout>
 
 ## Current Sticking Points
 
-- Lifetime annotations still confusing
-- String vs &str when to use which
-- Modules and crate structure
+| Concept | Status | Notes |
+|---------|--------|-------|
+| Lifetime annotations | 🟡 Confused | Still wrestling with `'a` syntax |
+| String vs `&str` | 🟡 Getting it | Use `String` for owned data, `&str` for borrowed |
+| Modules/crates | 🔴 Stuck | The module system is complex |
+
+<Callout type="tip" title="String vs &str Rule of Thumb">
+  Use `String` when you need ownership (heap-allocated, growable). Use `&str` for string slices/views into existing data.
+</Callout>
+
+## Project: DNS Server
+
+I'm not just reading — I'm building. My first real project is a DNS server from scratch.
+
+**What it does:**
+- Parses DNS packets byte-by-byte
+- Handles UDP sockets
+- Implements recursive resolution
+
+<Callout type="info">
+  Building a DNS server taught me more about binary protocols than any tutorial could. See the project at [github.com/HeyItWorked/dns-server-rust](https://github.com/HeyItWorked/dns-server-rust)
+</Callout>
 
 ## Next Steps
 
-- Build a small CLI tool
-- Try WebAssembly compilation
-- Contribute to an open source project
+- [x] Build a small CLI tool (done: word counter)
+- [x] Try WebAssembly compilation (done: basic setup)
+- [ ] Contribute to an open source project
+- [ ] Build something with async/await (Tokio)
+
+---
+
+*Last updated: February 2025*

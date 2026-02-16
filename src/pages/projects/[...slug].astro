@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Badge from '../../components/Badge.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import ProjectFeatureGrid from '../../components/ProjectFeatureGrid.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -14,12 +15,176 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await project.render();
+
+// Define feature cards for each project
+let projectFeatures: Array<{icon?: string; title: string; description: string; variant?: 'default' | 'accent'}> = [];
+let projectHighlights: Array<{icon?: string; title: string; description: string; variant?: 'default' | 'accent'}> = [];
+
+// Social Sentiment Pipeline Features
+if (project.slug === 'social-sentiment-pipeline') {
+  projectFeatures = [
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>',
+      title: 'Reddit API Integration',
+      description: 'PRAW-based data extraction with keyword search, focusing on comment analysis for higher accuracy'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>',
+      title: 'VADER Sentiment Analysis',
+      description: 'Real-time sentiment scoring with positive, negative, neutral, and compound metrics'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>',
+      title: 'Text Cleaning Pipeline',
+      description: 'Multi-step processing to remove URLs, markdown, and noise for accurate sentiment analysis'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>',
+      title: 'PostgreSQL Storage',
+      description: 'Three interconnected tables tracking search queries, posts, and analyzed comments with full sentiment metrics'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>',
+      title: 'Streamlit Dashboard',
+      description: 'Interactive visualization for exploring sentiment trends and insights from Reddit data'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+      title: 'Rate Limit Handling',
+      description: 'Graceful API rate limit management ensuring reliable data collection without service interruptions'
+    }
+  ];
+  
+  projectHighlights = [
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>',
+      title: 'End-to-End Pipeline',
+      description: 'Complete data engineering lifecycle from Reddit API to PostgreSQL to Streamlit visualization',
+      variant: 'accent'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+      title: 'Production-Ready Schema',
+      description: 'Scalable database design supporting complex queries and future expansion',
+      variant: 'accent'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>',
+      title: 'Iterative Improvement',
+      description: 'Pivoted from post analysis to comment analysis for higher quality sentiment results',
+      variant: 'accent'
+    }
+  ];
+}
+
+// CodeReview Lens Features
+else if (project.slug === 'codereview-lens') {
+  projectFeatures = [
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>',
+      title: 'GitHub PR Integration',
+      description: 'Seamless pull request diff extraction and automated analysis workflow'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+      title: 'Socratic Questioning',
+      description: 'AI-powered question generation that promotes critical thinking over direct corrections'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>',
+      title: 'Async Job Processing',
+      description: 'Non-blocking analysis jobs with Redis-backed queue for scalable PR processing'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>',
+      title: 'Java 21 Virtual Threads',
+      description: 'Modern concurrency with virtual threads for efficient resource utilization under load'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>',
+      title: 'Testcontainers Integration',
+      description: 'Realistic integration testing with PostgreSQL and Redis in Docker containers'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>',
+      title: 'Clean Architecture',
+      description: 'Well-separated layers with domain entities, repositories, services, and REST controllers'
+    }
+  ];
+  
+  projectHighlights = [
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>',
+      title: 'Learning-Focused Design',
+      description: 'Guides developers through self-reflection rather than spoon-feeding answers',
+      variant: 'accent'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+      title: 'Production-Ready Stack',
+      description: 'Spring Boot 3.3, PostgreSQL 16, Redis 7 with comprehensive error handling',
+      variant: 'accent'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>',
+      title: 'CI/CD Pipeline',
+      description: 'GitHub Actions with automated testing and Docker Compose for consistent deployments',
+      variant: 'accent'
+    }
+  ];
+}
+
+// PEX Scheduling Features
+else if (project.slug === 'pex-scheduling') {
+  projectFeatures = [
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>',
+      title: 'Data Reconciliation',
+      description: 'Cross-source analysis identifying data quality issues and establishing validation rules'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>',
+      title: 'Weighted Scoring Framework',
+      description: 'Multi-factor algorithm balancing patient preferences, provider availability, and resource efficiency'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>',
+      title: 'Snowflake Analysis',
+      description: 'Large-scale data querying and statistical analysis for scheduling patterns'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>',
+      title: 'GraphQL Integration',
+      description: 'API layer for flexible data access and integration with existing healthcare systems'
+    }
+  ];
+  
+  projectHighlights = [
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+      title: 'Hackathon Completion',
+      description: 'End-to-end prototype delivered within tight timeline demonstrating practical viability',
+      variant: 'accent'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+      title: 'Stakeholder Validation',
+      description: 'Positive feedback from healthcare professionals on approach and implementation',
+      variant: 'accent'
+    },
+    {
+      icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>',
+      title: 'Production Foundation',
+      description: 'Established groundwork and framework for continued development into production system',
+      variant: 'accent'
+    }
+  ];
+}
 ---
 
 <BaseLayout 
   title={`${project.data.title} | Liam Nguyen`}
   description={project.data.description}
-  section="personal"
 >
   <article class="container-custom">
     <Breadcrumb items={[
@@ -40,11 +205,11 @@ const { Content } = await project.render();
         )}
       </div>
       
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-6">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
         {project.data.title}
       </h1>
       
-      <p class="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed mb-6">
+      <p class="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
         {project.data.description}
       </p>
       
@@ -87,16 +252,72 @@ const { Content } = await project.render();
       </div>
     </header>
 
-    {/* Content */}
-    <div class="prose-custom max-w-4xl pb-16">
-      <Content />
-    </div>
+    {/* Project Overview Card */}
+    <section class="mb-12">
+      <div class="card max-w-4xl">
+        <h2 class="text-xl font-semibold text-foreground mb-4">Project Overview</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          {project.data.description}
+        </p>
+      </div>
+    </section>
+
+    {/* Key Features Grid */}
+    {projectFeatures.length > 0 && (
+      <section class="py-8">
+        <h2 class="text-2xl font-bold text-foreground mb-6">Key Features</h2>
+        <ProjectFeatureGrid features={projectFeatures} columns={3} />
+      </section>
+    )}
+
+    {/* Impact & Highlights */}
+    {projectHighlights.length > 0 && (
+      <section class="py-8 mt-8">
+        <h2 class="text-2xl font-bold text-foreground mb-6">Impact & Highlights</h2>
+        <ProjectFeatureGrid features={projectHighlights} columns={3} />
+      </section>
+    )}
+
+    {/* Detailed Documentation (GitHub README Style) */}
+    <section class="mt-12">
+      <details class="group" open>
+        <summary class="cursor-pointer list-none">
+          <div class="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span class="text-sm font-medium">README.md</span>
+            <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </summary>
+        
+        {/* GitHub-style README container */}
+        <div class="rounded-xl border border-white/10 bg-[#0d1117] overflow-hidden">
+          {/* README Header */}
+          <div class="px-6 py-4 border-b border-white/10 bg-white/5 flex items-center gap-3">
+            <svg class="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span class="text-sm font-medium text-foreground">README.md</span>
+          </div>
+          
+          {/* README Content */}
+          <div class="p-6 md:p-8 prose prose-invert prose-lg max-w-none">
+            <div class="markdown-body">
+              <Content />
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
     
     {/* Back to Projects */}
-    <div class="border-t border-[var(--color-border)] py-8">
+    <div class="border-t border-white/10 py-8 mt-12">
       <a 
         href="/projects"
-        class="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors"
+        class="inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors"
       >
         <svg class="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

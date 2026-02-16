@@ -2,33 +2,47 @@
 
 @layer base {
   :root {
-    --color-bg: #ffffff;
-    --color-bg-secondary: #f8fafc;
-    --color-bg-tertiary: #f1f5f9;
-    --color-text: #0f172a;
-    --color-text-secondary: #475569;
-    --color-text-muted: #94a3b8;
-    --color-border: #e2e8f0;
-    --color-primary: #2563eb;
-    --color-primary-light: #dbeafe;
-    --color-accent: #f59e0b;
-  }
-
-  .dark {
-    --color-bg: #0f172a;
-    --color-bg-secondary: #1e293b;
-    --color-bg-tertiary: #334155;
+    /* v0 Design System Colors */
+    --background: 222 47% 3%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 100% / 0.05;
+    --card-foreground: 0 0% 96%;
+    --popover: 222 47% 5%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 263 70% 68%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 100% / 0.08;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 100% / 0.05;
+    --muted-foreground: 0 0% 64%;
+    --accent: 292 84% 72%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 100% / 0.1;
+    --ring: 263 70% 68%;
+    --radius: 1rem;
+    
+    /* Font variables */
+    --font-inter: 'Inter', system-ui, sans-serif;
+    --font-jetbrains-mono: 'JetBrains Mono', monospace;
+    
+    /* Legacy color vars for compatibility */
+    --color-bg: #020617;
+    --color-bg-secondary: #0f172a;
+    --color-bg-tertiary: #1e293b;
     --color-text: #f8fafc;
-    --color-text-secondary: #cbd5e1;
+    --color-text-secondary: #94a3b8;
     --color-text-muted: #64748b;
-    --color-border: #334155;
-    --color-primary: #60a5fa;
-    --color-primary-light: #1e3a8a;
-    --color-accent: #fbbf24;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-primary: #10b981;
+    --color-primary-light: rgba(139, 92, 246, 0.2);
+    --color-accent: #e879f9;
   }
 
   * {
-    border-color: var(--color-border);
+    border-color: hsl(var(--border));
   }
 
   html {
@@ -36,158 +50,9 @@
   }
 
   body {
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    transition: background-color 0.3s, color 0.3s;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    letter-spacing: -0.025em;
-  }
-
-  h1 {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-
-  @media (min-width: 768px) {
-    h1 {
-      font-size: 3rem;
-      line-height: 1;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h1 {
-      font-size: 3.75rem;
-      line-height: 1;
-    }
-  }
-
-  h2 {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
-  @media (min-width: 768px) {
-    h2 {
-      font-size: 2.25rem;
-      line-height: 2.5rem;
-    }
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-
-  @media (min-width: 768px) {
-    h3 {
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-    }
-  }
-
-  h4 {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-
-  @media (min-width: 768px) {
-    h4 {
-      font-size: 1.5rem;
-      line-height: 2rem;
-    }
-  }
-
-  h5 {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-
-  @media (min-width: 768px) {
-    h5 {
-      font-size: 1.25rem;
-      line-height: 1.75rem;
-    }
-  }
-
-  h6 {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    h6 {
-      font-size: 1.125rem;
-      line-height: 1.75rem;
-    }
-  }
-
-  p {
-    line-height: 1.625;
-  }
-
-  a {
-    color: var(--color-primary);
-    transition: color 0.2s;
-  }
-
-  a:hover {
-    color: var(--color-accent);
-  }
-
-  code {
-    font-family: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, monospace;
-    font-size: 0.875rem;
-    background-color: var(--color-bg-tertiary);
-    padding: 0.25rem 0.375rem;
-    border-radius: 0.25rem;
-  }
-
-  pre {
-    background-color: var(--color-bg-tertiary);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    overflow-x: auto;
-  }
-
-  pre code {
-    background-color: transparent;
-    padding: 0;
-  }
-
-  blockquote {
-    border-left: 4px solid var(--color-primary);
-    padding-left: 1rem;
-    font-style: italic;
-    color: var(--color-text-secondary);
-  }
-
-  ul, ol {
-    list-style-position: inside;
-  }
-
-  ul {
-    list-style-type: disc;
-  }
-
-  ol {
-    list-style-type: decimal;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-  }
-
-  hr {
-    border-color: var(--color-border);
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    background-color: #020617;
+    color: #f8fafc;
+    font-family: var(--font-inter);
   }
 }
 
@@ -214,67 +79,27 @@
     }
   }
 
+  /* Card component - matches bento card styling */
   .card {
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    transition: all 0.2s;
+    @apply rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300;
   }
-
+  
   .card:hover {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
-    transform: translateY(-2px);
+    @apply border-emerald-500/30;
   }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    font-size: 0.9375rem;
-    transition: all 0.2s;
-    cursor: pointer;
-    text-decoration: none;
-  }
-
+  /* Button components */
   .btn-primary {
-    background-color: var(--color-primary);
-    color: white;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  }
-
-  .btn-primary:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
-    color: white;
+    @apply inline-flex items-center justify-center rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-emerald-600;
   }
 
   .btn-secondary {
-    background-color: var(--color-bg-tertiary);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
+    @apply inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-emerald-500/30 hover:bg-white/10;
   }
 
-  .btn-secondary:hover {
-    background-color: var(--color-border);
-    transform: translateY(-1px);
-    color: var(--color-text);
-  }
-
+  /* Tag component */
   .tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.125rem 0.625rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    background-color: var(--color-primary-light);
-    color: var(--color-primary);
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-gray-400 transition-colors hover:bg-emerald-500/10 hover:text-emerald-400;
   }
 }
 
@@ -282,28 +107,356 @@
   .text-balance {
     text-wrap: balance;
   }
-
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out;
+  
+  /* Text colors that work with Tailwind v4 */
+  .text-foreground {
+    color: #f8fafc;
   }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0.2;
-      transform: translateY(12px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  
+  .text-muted-foreground {
+    color: #94a3b8;
   }
+}
 
-  .animate-pulse {
-    animation: pulse 1s ease-in-out infinite;
+/* Bento Card Animation - CSS replacement for Framer Motion */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+.bento-card {
+  animation: fadeInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Pulse glow animation for gradient orbs */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
   }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+/* Dot grid background */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* GitHub-style Markdown Body for README sections */
+.markdown-body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4 {
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #f8fafc;
+}
+
+.markdown-body h1 {
+  font-size: 1.75em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.markdown-body h2 {
+  font-size: 1.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.markdown-body h3 {
+  font-size: 1.25em;
+}
+
+.markdown-body h4 {
+  font-size: 1em;
+}
+
+.markdown-body p {
+  margin-bottom: 1em;
+  color: #94a3b8;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  margin-bottom: 1em;
+  padding-left: 2em;
+}
+
+.markdown-body ul {
+  list-style-type: disc;
+}
+
+.markdown-body ol {
+  list-style-type: decimal;
+}
+
+.markdown-body li {
+  margin-bottom: 0.25em;
+  color: #94a3b8;
+}
+
+.markdown-body li::marker {
+  color: #64748b;
+}
+
+.markdown-body strong {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.markdown-body code {
+  background-color: rgba(110, 118, 129, 0.4);
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.875em;
+  color: #f8fafc;
+}
+
+.markdown-body pre {
+  background-color: #161b22;
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.markdown-body pre code {
+  background-color: transparent;
+  padding: 0;
+  color: #f8fafc;
+}
+
+.markdown-body blockquote {
+  border-left: 4px solid #10b981;
+  padding-left: 1em;
+  margin-left: 0;
+  margin-bottom: 1em;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.markdown-body hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 2em 0;
+}
+
+.markdown-body a {
+  color: #10b981;
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+  color: #a78bfa;
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+.markdown-body th,
+.markdown-body td {
+  padding: 0.5em 1em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+}
+
+.markdown-body th {
+  background-color: rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.markdown-body tr:nth-child(2n) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Prose styles for Tailwind typography */
+.prose {
+  color: #94a3b8;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: #f8fafc;
+}
+
+.prose strong {
+  color: #f8fafc;
+}
+
+.prose a {
+  color: #10b981;
+}
+
+/* Prose Custom - for garden notes and content pages */
+.prose-custom {
+  color: #94a3b8;
+  line-height: 1.75;
+}
+
+.prose-custom h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.prose-custom h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f8fafc;
+  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prose-custom h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f8fafc;
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.prose-custom p {
+  margin-bottom: 1rem;
+}
+
+.prose-custom ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose-custom ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose-custom li {
+  margin-bottom: 0.5rem;
+}
+
+.prose-custom li::marker {
+  color: #10b981;
+}
+
+.prose-custom strong {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.prose-custom a {
+  color: #10b981;
+  text-decoration: none;
+}
+
+.prose-custom a:hover {
+  text-decoration: underline;
+}
+
+.prose-custom code {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.875em;
+  color: #f8fafc;
+}
+
+.prose-custom pre {
+  background-color: #0f172a;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prose-custom pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.prose-custom blockquote {
+  border-left: 4px solid #10b981;
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-bottom: 1rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.prose-custom table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.prose-custom th,
+.prose-custom td {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+}
+
+.prose-custom th {
+  background-color: rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.prose-custom tr:nth-child(2n) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.prose-custom hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 2rem 0;
+}
+
+/* Checkbox list styles */
+.prose-custom ul li input[type="checkbox"] {
+  margin-right: 0.5rem;
+  accent-color: #10b981;
+}
+
+/* Not-prose utility to escape prose styling for containers */
+.prose-custom .not-prose {
+  color: inherit;
+}
+
+.prose-custom .not-prose * {
+  color: inherit;
 }

@@ -4,26 +4,26 @@ import Badge from '../components/Badge.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 
 const currentLearning = [
-  { topic: 'Rust', description: 'Systems programming and WebAssembly' },
-  { topic: 'Machine Learning', description: 'Practical ML for software engineers' },
-  { topic: 'Technical Writing', description: 'Better documentation and communication' },
+  { topic: 'Healthcare Data Systems', description: 'Clinical data delivery and reporting platforms' },
+  { topic: 'SQL Optimization', description: 'Snowflake query performance and monitoring' },
+  { topic: 'AI-Assisted Support', description: 'Leveraging LLMs for problem-solving' },
 ];
 
 const currentlyWorkingOn = [
+  { item: 'Platform Support', description: 'Supporting payer clients at athenahealth' },
+  { item: 'Side Projects', description: 'Social Sentiment Pipeline & CodeReview Lens' },
   { item: 'Personal Website', description: 'This site - built with Astro and Tailwind' },
-  { item: 'Open Source', description: 'Contributing to developer tools' },
-  { item: 'Reading', description: 'Project Hail Mary by Andy Weir' },
 ];
 
 const interests = [
-  'Open source software',
-  'Developer experience',
-  'Distributed systems',
-  'Mechanical keyboards',
-  'Coffee brewing',
-  'Hiking',
-  'Sci-fi books',
-  'Minimalism',
+  'Healthcare technology',
+  'Data engineering',
+  'AI tools & automation',
+  'Support workflows',
+  'Backend development',
+  'Open source',
+  'Learning in public',
+  'Problem-solving',
 ];
 
 const personalLinks = [
@@ -51,7 +51,6 @@ const personalLinks = [
 <BaseLayout 
   title="About | Liam Nguyen"
   description="A bit about me, my interests, and what I am currently working on."
-  section="personal"
 >
   <div class="container-custom">
     <Breadcrumb items={[
@@ -64,48 +63,49 @@ const personalLinks = [
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
         {/* Avatar */}
         <div class="lg:col-span-1">
-          <div class="w-48 h-48 mx-auto lg:mx-0 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center shadow-xl">
+          <div class="w-48 h-48 mx-auto lg:mx-0 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-xl">
             <span class="text-5xl font-bold text-white">LN</span>
           </div>
         </div>
         
         {/* Intro */}
         <div class="lg:col-span-2">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Hi, I am Liam
           </h1>
           
-          <div class="space-y-4 text-lg text-[var(--color-text-secondary)] leading-relaxed">
+          <div class="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
-              I'm a software engineer based in San Francisco, currently building distributed systems at TechCorp Inc. 
-              When I'm not writing code, you'll find me exploring new technologies, contributing to open source, 
-              or getting lost in a good sci-fi novel.
+              I'm a Platform Support Associate at athenahealth based in Belfast, ME, supporting payer clients
+              with clinical data delivery and reporting systems. I bridge communication between technical teams
+              and clients while continuously improving our support workflows.
             </p>
             <p>
-              I believe in the power of technology to solve real problems, but also in the importance of 
-              building sustainable, maintainable systems. The best code is often the code you don't have to write.
+              My background is in Computer Science from University of Manitoba, and I'm passionate about
+              building side projects that solve real problems. I work with Python, Java, SQL, and leverage
+              AI tools to accelerate learning and problem-solving in my day-to-day work.
             </p>
             <p>
-              This website is my digital home - a place to share what I'm learning, document my projects, 
-              and connect with like-minded people. Feel free to explore and reach out!
+              This website is my digital home - a place to document my projects, share what I'm learning,
+              and showcase my growing technical skills. Feel free to explore and reach out!
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <hr class="border-[var(--color-border)]" />
+    <hr class="border-white/10" />
 
     {/* Currently Section */}
     <section class="py-12">
-      <h2 class="text-2xl font-bold text-[var(--color-text)] mb-8">
+      <h2 class="text-2xl font-bold text-foreground mb-8">
         Currently
       </h2>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="card">
-          <h3 class="text-lg font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">
-            <svg class="w-5 h-5 text-[var(--color-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <h3 class="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
             </svg>
             Learning
@@ -113,10 +113,10 @@ const personalLinks = [
           <ul class="space-y-3">
             {currentLearning.map((item) => (
               <li class="flex items-start gap-3">
-                <span class="text-[var(--color-accent)] mt-1">•</span>
+                <span class="text-fuchsia-400 mt-1">•</span>
                 <div>
-                  <span class="font-medium text-[var(--color-text)]">{item.topic}</span>
-                  <span class="text-[var(--color-text-muted)]"> — {item.description}</span>
+                  <span class="font-medium text-foreground">{item.topic}</span>
+                  <span class="text-muted-foreground"> — {item.description}</span>
                 </div>
               </li>
             ))}
@@ -124,8 +124,8 @@ const personalLinks = [
         </div>
         
         <div class="card">
-          <h3 class="text-lg font-semibold text-[var(--color-text)] mb-4 flex items-center gap-2">
-            <svg class="w-5 h-5 text-[var(--color-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <h3 class="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
             Working On
@@ -133,10 +133,10 @@ const personalLinks = [
           <ul class="space-y-3">
             {currentlyWorkingOn.map((item) => (
               <li class="flex items-start gap-3">
-                <span class="text-[var(--color-accent)] mt-1">•</span>
+                <span class="text-fuchsia-400 mt-1">•</span>
                 <div>
-                  <span class="font-medium text-[var(--color-text)]">{item.item}</span>
-                  <span class="text-[var(--color-text-muted)]"> — {item.description}</span>
+                  <span class="font-medium text-foreground">{item.item}</span>
+                  <span class="text-muted-foreground"> — {item.description}</span>
                 </div>
               </li>
             ))}
@@ -145,11 +145,11 @@ const personalLinks = [
       </div>
     </section>
 
-    <hr class="border-[var(--color-border)]" />
+    <hr class="border-white/10" />
 
     {/* Personal Links */}
     <section class="py-12">
-      <h2 class="text-2xl font-bold text-[var(--color-text)] mb-8">
+      <h2 class="text-2xl font-bold text-foreground mb-8">
         Explore My Work
       </h2>
       
@@ -157,18 +157,18 @@ const personalLinks = [
         {personalLinks.map((link) => (
           <a 
             href={link.href}
-            class="card group hover:border-[var(--color-primary)]/30 transition-all"
+            class="card group hover:border-violet-500/30 transition-all"
           >
-            <div class="w-12 h-12 rounded-lg bg-[var(--color-primary-light)] flex items-center justify-center text-[var(--color-primary)] mb-4 group-hover:scale-110 transition-transform">
+            <div class="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-4 group-hover:scale-110 transition-transform">
               <Fragment set:html={link.icon} />
             </div>
-            <h3 class="text-lg font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors mb-2">
+            <h3 class="text-lg font-semibold text-foreground group-hover:text-emerald-400 transition-colors mb-2">
               {link.label}
             </h3>
-            <p class="text-sm text-[var(--color-text-secondary)]">
+            <p class="text-sm text-muted-foreground">
               {link.description}
             </p>
-            <div class="mt-4 flex items-center text-[var(--color-primary)] text-sm font-medium">
+            <div class="mt-4 flex items-center text-emerald-400 text-sm font-medium">
               Explore
               <svg class="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -179,34 +179,12 @@ const personalLinks = [
       </div>
     </section>
 
-    <hr class="border-[var(--color-border)]" />
+    <hr class="border-white/10" />
 
-    {/* What I'm Learning */}
+    {/* Skills & Interests */}
     <section class="py-12">
-      <h2 class="text-2xl font-bold text-[var(--color-text)] mb-8">
+      <h2 class="text-2xl font-bold text-foreground mb-8">
         Skills & Interests
-      </h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {currentLearning.map((item) => (
-          <div class="card">
-            <div class="flex items-center gap-3 mb-3">
-              <Badge text={item.topic} variant="primary" />
-            </div>
-            <p class="text-[var(--color-text-secondary)]">
-              {item.description}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <hr class="border-[var(--color-border)]" />
-
-    {/* Interests */}
-    <section class="py-12">
-      <h2 class="text-2xl font-bold text-[var(--color-text)] mb-8">
-        Beyond Code
       </h2>
       
       <div class="flex flex-wrap gap-3">
@@ -217,56 +195,56 @@ const personalLinks = [
         ))}
       </div>
       
-      <div class="mt-8 prose-custom max-w-2xl">
-        <p class="text-[var(--color-text-secondary)]">
-          I believe that having diverse interests makes me a better engineer. Whether it's understanding 
-          the precision of coffee brewing, the problem-solving of mechanical keyboards, or the vast 
-          worlds of science fiction, these interests inform how I approach problems and stay creative.
+      <div class="mt-8 max-w-2xl">
+        <p class="text-muted-foreground">
+          I'm focused on building technical skills through hands-on projects and learning from real-world
+          support scenarios. My interests in healthcare tech, data engineering, and AI tools align with
+          my career goals of becoming a stronger backend engineer.
         </p>
       </div>
     </section>
 
-    <hr class="border-[var(--color-border)]" />
+    <hr class="border-white/10" />
 
     {/* Random Facts */}
     <section class="py-12">
-      <h2 class="text-2xl font-bold text-[var(--color-text)] mb-8">
+      <h2 class="text-2xl font-bold text-foreground mb-8">
         Random Facts
       </h2>
       
-      <ul class="space-y-3 text-[var(--color-text-secondary)]">
+      <ul class="space-y-3 text-muted-foreground">
         <li class="flex items-start gap-3">
-          <span class="text-[var(--color-accent)]">→</span>
-          <span>I switch between macOS and Linux depending on what I'm working on</span>
+          <span class="text-fuchsia-400">→</span>
+          <span>Started at athenahealth in November 2024, learning healthcare tech daily</span>
         </li>
         <li class="flex items-start gap-3">
-          <span class="text-[var(--color-accent)]">→</span>
-          <span>My current read: <em>Project Hail Mary</em> by Andy Weir</span>
+          <span class="text-fuchsia-400">→</span>
+          <span>Use company-authorized AI tools to bridge knowledge gaps and accelerate learning</span>
         </li>
         <li class="flex items-start gap-3">
-          <span class="text-[var(--color-accent)]">→</span>
-          <span>I prefer mechanical keyboards with clicky switches (sorry, coworkers!)</span>
+          <span class="text-fuchsia-400">→</span>
+          <span>Built side projects with Python, Java, PostgreSQL, and Redis</span>
         </li>
         <li class="flex items-start gap-3">
-          <span class="text-[var(--color-accent)]">→</span>
-          <span>My coffee setup: V60 pour-over with freshly ground beans</span>
+          <span class="text-fuchsia-400">→</span>
+          <span>AWS Certified Cloud Practitioner & Agentic AI Champion</span>
         </li>
         <li class="flex items-start gap-3">
-          <span class="text-[var(--color-accent)]">→</span>
-          <span>I try to hike at least once a month to clear my head</span>
+          <span class="text-fuchsia-400">→</span>
+          <span>Based in Belfast, ME - enjoying the tech scene in Maine</span>
         </li>
       </ul>
     </section>
 
-    <hr class="border-[var(--color-border)]" />
+    <hr class="border-white/10" />
 
     {/* Get In Touch */}
     <section class="py-12">
       <div class="card max-w-2xl mx-auto text-center">
-        <h2 class="text-2xl font-bold text-[var(--color-text)] mb-4">
+        <h2 class="text-2xl font-bold text-foreground mb-4">
           Let's Connect
         </h2>
-        <p class="text-[var(--color-text-secondary)] mb-6">
+        <p class="text-muted-foreground mb-6">
           Whether you want to discuss a project, share book recommendations, 
           or just say hello, I'd love to hear from you.
         </p>
@@ -274,13 +252,13 @@ const personalLinks = [
           <a href="/contact" class="btn-primary">
             Get in Touch
           </a>
-          <a 
-            href="https://twitter.com/yourusername" 
-            target="_blank" 
+          <a
+            href="https://github.com/HeyItWorked"
+            target="_blank"
             rel="noopener noreferrer"
             class="btn-secondary"
           >
-            Follow on Twitter
+            View on GitHub
           </a>
         </div>
       </div>

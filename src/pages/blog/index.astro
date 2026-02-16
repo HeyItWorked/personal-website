@@ -26,7 +26,6 @@ function formatDate(date: Date): string {
 <BaseLayout 
   title="Blog | Liam Nguyen"
   description="Thoughts on software engineering, technology, and continuous learning."
-  section="personal"
 >
   <div class="container-custom">
     <Breadcrumb items={[
@@ -36,10 +35,10 @@ function formatDate(date: Date): string {
     
     {/* Header */}
     <header class="py-12 lg:py-16">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
         Blog
       </h1>
-      <p class="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl">
+      <p class="text-lg md:text-xl text-muted-foreground max-w-2xl">
         Thoughts on software engineering, technology, and my journey as a developer. 
         I write about what I'm learning, building, and thinking about.
       </p>
@@ -48,18 +47,18 @@ function formatDate(date: Date): string {
     {/* Tag Filter */}
     {allTags.length > 0 && (
       <div class="mb-12">
-        <p class="text-sm text-[var(--color-text-muted)] mb-3">Filter by topic:</p>
+        <p class="text-sm text-muted-foreground mb-3">Filter by topic:</p>
         <div class="flex flex-wrap gap-2">
           <a 
             href="/blog" 
-            class="tag hover:bg-[var(--color-primary)] hover:text-white transition-colors"
+            class="tag"
           >
             All
           </a>
           {allTags.map((tag) => (
             <a 
               href={`/blog?tag=${tag}`}
-              class="tag hover:bg-[var(--color-primary)] hover:text-white transition-colors"
+              class="tag"
             >
               #{tag}
             </a>
@@ -70,24 +69,24 @@ function formatDate(date: Date): string {
 
     {/* Posts List */}
     <section class="pb-16 lg:pb-24">
-      <div class="space-y-8">
+      <div class="space-y-6">
         {posts.map((post) => (
           <article class="card group">
             <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
               {/* Date */}
-              <time class="text-sm text-[var(--color-text-muted)] md:w-32 flex-shrink-0 md:pt-1">
+              <time class="text-sm text-muted-foreground md:w-32 flex-shrink-0 md:pt-1">
                 {formatDate(post.data.pubDate)}
               </time>
               
               {/* Content */}
               <div class="flex-1">
-                <h2 class="text-xl md:text-2xl font-bold text-[var(--color-text)] mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+                <h2 class="text-xl md:text-2xl font-bold text-foreground mb-2 group-hover:text-emerald-400 transition-colors">
                   <a href={`/blog/${post.slug}`}>
                     {post.data.title}
                   </a>
                 </h2>
                 
-                <p class="text-[var(--color-text-secondary)] mb-4 leading-relaxed">
+                <p class="text-muted-foreground mb-4 leading-relaxed">
                   {post.data.description}
                 </p>
                 
@@ -99,7 +98,7 @@ function formatDate(date: Date): string {
               </div>
               
               {/* Arrow */}
-              <div class="hidden md:flex items-center text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] transition-colors">
+              <div class="hidden md:flex items-center text-muted-foreground group-hover:text-violet-400 transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -111,7 +110,7 @@ function formatDate(date: Date): string {
       
       {posts.length === 0 && (
         <div class="text-center py-16">
-          <p class="text-[var(--color-text-secondary)]">No posts yet. Check back soon!</p>
+          <p class="text-muted-foreground">No posts yet. Check back soon!</p>
         </div>
       )}
     </section>

@@ -20,7 +20,6 @@ const personalProjects = projects.filter((p) => p.data.type === 'personal');
 <BaseLayout 
   title="Projects | Liam Nguyen"
   description="A collection of projects I've built - from professional work to personal experiments."
-  section="personal"
 >
   <div class="container-custom">
     <Breadcrumb items={[
@@ -30,32 +29,32 @@ const personalProjects = projects.filter((p) => p.data.type === 'personal');
     
     {/* Header */}
     <header class="py-12 lg:py-16">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
         Projects
       </h1>
-      <p class="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl">
+      <p class="text-lg md:text-xl text-muted-foreground max-w-2xl">
         A collection of things I've built - from professional work at companies to personal experiments 
         and open source contributions. Each project taught me something new.
       </p>
     </header>
 
     {/* Tabs */}
-    <div class="border-b border-[var(--color-border)] mb-12">
+    <div class="border-b border-white/10 mb-12">
       <nav class="flex gap-8" aria-label="Project filters">
         <button 
-          class="project-tab active pb-4 text-sm font-medium border-b-2 border-[var(--color-primary)] text-[var(--color-primary)]"
+          class="project-tab active pb-4 text-sm font-medium border-b-2 border-emerald-500 text-emerald-400"
           data-filter="all"
         >
           All ({projects.length})
         </button>
         <button 
-          class="project-tab pb-4 text-sm font-medium border-b-2 border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors"
+          class="project-tab pb-4 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground transition-colors"
           data-filter="professional"
         >
           Professional ({professionalProjects.length})
         </button>
         <button 
-          class="project-tab pb-4 text-sm font-medium border-b-2 border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors"
+          class="project-tab pb-4 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground transition-colors"
           data-filter="personal"
         >
           Personal ({personalProjects.length})
@@ -82,7 +81,7 @@ const personalProjects = projects.filter((p) => p.data.type === 'personal');
       
       {projects.length === 0 && (
         <div class="text-center py-16">
-          <p class="text-[var(--color-text-secondary)]">No projects yet. Check back soon!</p>
+          <p class="text-muted-foreground">No projects yet. Check back soon!</p>
         </div>
       )}
     </section>
@@ -99,11 +98,11 @@ const personalProjects = projects.filter((p) => p.data.type === 'personal');
       
       // Update active tab styling
       tabs.forEach((t) => {
-        t.classList.remove('active', 'border-[var(--color-primary)]', 'text-[var(--color-primary)]');
-        t.classList.add('border-transparent', 'text-[var(--color-text-secondary)]');
+        t.classList.remove('active', 'border-emerald-500', 'text-emerald-400');
+        t.classList.add('border-transparent', 'text-muted-foreground');
       });
-      tab.classList.add('active', 'border-[var(--color-primary)]', 'text-[var(--color-primary)]');
-      tab.classList.remove('border-transparent', 'text-[var(--color-text-secondary)]');
+      tab.classList.add('active', 'border-emerald-500', 'text-emerald-400');
+      tab.classList.remove('border-transparent', 'text-muted-foreground');
       
       // Filter projects
       projectItems.forEach((item) => {

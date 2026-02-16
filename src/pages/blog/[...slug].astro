@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Badge from '../../components/Badge.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -42,7 +42,6 @@ const readingTime = calculateReadingTime(post.body);
 <BaseLayout 
   title={`${post.data.title} | Liam Nguyen`}
   description={post.data.description}
-  section="personal"
 >
   <article class="container-custom">
     <Breadcrumb items={[
@@ -53,7 +52,7 @@ const readingTime = calculateReadingTime(post.body);
     
     {/* Header */}
     <header class="py-8 lg:py-12 max-w-3xl">
-      <div class="flex flex-wrap items-center gap-3 mb-6 text-sm text-[var(--color-text-muted)]">
+      <div class="flex flex-wrap items-center gap-3 mb-6 text-sm text-muted-foreground">
         <time>{formatDate(post.data.pubDate)}</time>
         <span>•</span>
         <span>{readingTime} min read</span>
@@ -65,11 +64,11 @@ const readingTime = calculateReadingTime(post.body);
         )}
       </div>
       
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-6">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
         {post.data.title}
       </h1>
       
-      <p class="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed">
+      <p class="text-lg md:text-xl text-muted-foreground leading-relaxed">
         {post.data.description}
       </p>
       
@@ -86,17 +85,17 @@ const readingTime = calculateReadingTime(post.body);
     </div>
     
     {/* Navigation */}
-    <nav class="border-t border-[var(--color-border)] py-8">
+    <nav class="border-t border-white/10 py-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {prevPost && (
           <a 
             href={`/blog/${prevPost.slug}`}
             class="card group flex flex-col"
           >
-            <span class="text-sm text-[var(--color-text-muted)] mb-2">
+            <span class="text-sm text-muted-foreground mb-2">
               ← Previous
             </span>
-            <span class="font-medium text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors">
+            <span class="font-medium text-foreground group-hover:text-emerald-400 transition-colors">
               {prevPost.data.title}
             </span>
           </a>
@@ -107,10 +106,10 @@ const readingTime = calculateReadingTime(post.body);
             href={`/blog/${nextPost.slug}`}
             class={`card group flex flex-col ${!prevPost ? 'md:col-start-2' : ''}`}
           >
-            <span class="text-sm text-[var(--color-text-muted)] mb-2 md:text-right">
+            <span class="text-sm text-muted-foreground mb-2 md:text-right">
               Next →
             </span>
-            <span class="font-medium text-[var(--var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors md:text-right">
+            <span class="font-medium text-foreground group-hover:text-emerald-400 transition-colors md:text-right">
               {nextPost.data.title}
             </span>
           </a>

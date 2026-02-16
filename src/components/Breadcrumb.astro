@@ -29,7 +29,7 @@ const breadcrumbJsonLd = {
       <li class="flex items-center">
         {index > 0 && (
           <svg 
-            class="w-4 h-4 mx-2 text-[var(--color-text-muted)]" 
+            class="w-4 h-4 mx-2 text-muted-foreground" 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -42,12 +42,12 @@ const breadcrumbJsonLd = {
         {item.href ? (
           <a 
             href={item.href}
-            class="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors"
+            class="text-muted-foreground hover:text-emerald-400 transition-colors"
           >
             {item.label}
           </a>
         ) : (
-          <span class="text-[var(--color-text)] font-medium" aria-current="page">
+          <span class="text-foreground font-medium" aria-current="page">
             {item.label}
           </span>
         )}

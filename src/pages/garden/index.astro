@@ -36,7 +36,6 @@ function formatDate(date: Date): string {
 <BaseLayout 
   title="Digital Garden | Liam Nguyen"
   description="A collection of my evolving thoughts, notes, and ideas - organized by maturity rather than date."
-  section="personal"
 >
   <div class="container-custom">
     <Breadcrumb items={[
@@ -46,15 +45,15 @@ function formatDate(date: Date): string {
     
     {/* Header */}
     <header class="py-12 lg:py-16 max-w-3xl">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-text)] mb-6">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
         Digital Garden 🌱
       </h1>
-      <p class="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed mb-6">
+      <p class="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
         Welcome to my digital garden - a collection of notes, ideas, and half-formed thoughts that I'm cultivating over time. 
         Unlike a traditional blog, these notes evolve and grow.
       </p>
-      <p class="text-[var(--color-text-secondary)]">
-        <a href="#about" class="text-[var(--color-primary)]">Learn more about digital gardens →</a>
+      <p class="text-muted-foreground">
+        <a href="#about" class="text-emerald-400 hover:text-violet-300 transition-colors">Learn more about digital gardens →</a>
       </p>
     </header>
 
@@ -63,8 +62,8 @@ function formatDate(date: Date): string {
       {(['evergreen', 'budding', 'seedling'] as const).map((maturity) => (
         <div class="card text-center">
           <div class="text-3xl mb-2">{maturityEmojis[maturity]}</div>
-          <h3 class="font-semibold text-[var(--color-text)] capitalize mb-1">{maturity}</h3>
-          <p class="text-sm text-[var(--color-text-secondary)]">{maturityDescriptions[maturity]}</p>
+          <h3 class="font-semibold text-foreground capitalize mb-1">{maturity}</h3>
+          <p class="text-sm text-muted-foreground">{maturityDescriptions[maturity]}</p>
         </div>
       ))}
     </div>
@@ -83,7 +82,7 @@ function formatDate(date: Date): string {
               {/* Content */}
               <div class="flex-1 min-w-0">
                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-2">
-                  <h2 class="text-xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors">
+                  <h2 class="text-xl font-bold text-foreground group-hover:text-violet-400 transition-colors">
                     <a href={`/garden/${note.slug}`}>
                       {note.data.title}
                     </a>
@@ -94,19 +93,19 @@ function formatDate(date: Date): string {
                   />
                 </div>
                 
-                <p class="text-[var(--color-text-secondary)] mb-3">
+                <p class="text-muted-foreground mb-3">
                   {note.data.description}
                 </p>
                 
                 <div class="flex flex-wrap gap-2">
                   {note.data.tags.map((tag) => (
-                    <span class="text-xs text-[var(--color-text-muted)]">#{tag}</span>
+                    <span class="text-xs text-muted-foreground">#{tag}</span>
                   ))}
                 </div>
               </div>
               
               {/* Arrow */}
-              <div class="hidden md:flex items-center text-[var(--color-text-muted)] group-hover:text-[var(--color-primary)] transition-colors flex-shrink-0">
+              <div class="hidden md:flex items-center text-muted-foreground group-hover:text-violet-400 transition-colors flex-shrink-0">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
@@ -118,25 +117,25 @@ function formatDate(date: Date): string {
       
       {notes.length === 0 && (
         <div class="text-center py-16">
-          <p class="text-[var(--color-text-secondary)]">No notes yet. Planting seeds soon!</p>
+          <p class="text-muted-foreground">No notes yet. Planting seeds soon!</p>
         </div>
       )}
     </section>
 
     {/* About Digital Gardens */}
-    <section id="about" class="py-16 border-t border-[var(--color-border)]">
+    <section id="about" class="py-16 border-t border-white/10">
       <div class="max-w-2xl">
-        <h2 class="text-2xl font-bold text-[var(--color-text)] mb-4">
+        <h2 class="text-2xl font-bold text-foreground mb-4">
           What is a Digital Garden?
         </h2>
-        <div class="space-y-4 text-[var(--color-text-secondary)]">
+        <div class="space-y-4 text-muted-foreground">
           <p>
             Unlike a traditional blog where posts are published and frozen in time, a digital garden is a space for 
-            <strong class="text-[var(--color-text)]">growing ideas</strong>. Notes here range from rough seedlings 
+            <strong class="text-foreground">growing ideas</strong>. Notes here range from rough seedlings 
             (fleeting thoughts) to budding ideas (developing concepts) to evergreen notes (well-developed, lasting content).
           </p>
           <p>
-            This approach emphasizes <strong class="text-[var(--color-text)]">learning in public</strong> and the value of 
+            This approach emphasizes <strong class="text-foreground">learning in public</strong> and the value of 
             sharing work at various stages of completion. It's okay for ideas to be imperfect - that's how they grow.
           </p>
           <p>
