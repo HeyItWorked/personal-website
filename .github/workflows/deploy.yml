@@ -5,6 +5,7 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+  workflow_dispatch:  # Allow manual trigger
 
 # Allow this job to push to the repository (for GitHub Pages)
 permissions:
