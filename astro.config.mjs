@@ -8,10 +8,9 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: Update this with your actual domain before deploying
-  // Cloudflare Pages: https://<your-site>.pages.dev
-  // Custom domain: https://your-domain.com
-  site: 'https://example.com',
+  // GitHub Pages: https://heyitworked.github.io/personal-website/
+  site: 'https://heyitworked.github.io',
+  base: '/personal-website',
   output: 'static',
   
   vite: {
