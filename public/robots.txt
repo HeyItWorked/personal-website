@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: Update with your actual domain
-# Cloudflare Pages: https://<your-site>.pages.dev/sitemap-index.xml
-# Custom domain: https://your-domain.com/sitemap-index.xml
-Sitemap: https://example.com/sitemap-index.xml
+Sitemap: https://liamnguyenn.com/sitemap-index.xml

@@ -8,9 +8,9 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  // GitHub Pages: https://heyitworked.github.io/personal-website/
-  site: 'https://heyitworked.github.io',
-  base: '/personal-website',
+  // Your custom domain
+  site: 'https://liamnguyenn.com',
+  // Remove base path - not needed for custom domain
   output: 'static',
   
   vite: {
