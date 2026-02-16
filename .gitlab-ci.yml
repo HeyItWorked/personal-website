@@ -1,7 +1,8 @@
 # GitLab CI/CD Pipeline for Astro Site
-# Deploys to GitLab Pages
+# Deploys to GitLab Pages with security scanning
 
 stages:
+  - security
   - build
   - deploy
 
@@ -15,7 +16,40 @@ cache:
     - node_modules/
     - dist/
 
-# Build stage
+# ==========================================
+# SECURITY STAGE - Dependency Scanning
+# ==========================================
+
+security:
+  stage: security
+  image: oven/bun:1
+  script:
+    - bun install
+    # Run audit and fail on critical/high vulnerabilities
+    - |
+      bun audit 2>&1 | tee audit-output.txt || true
+      if grep -E "(critical|high)" audit-output.txt > /dev/null; then
+        echo "❌ Critical or high severity vulnerabilities found!"
+        echo "Run 'bun audit --fix' locally to attempt automatic fixes"
+        exit 1
+      else
+        echo "✅ No critical/high vulnerabilities found"
+      fi
+  allow_failure: false
+  artifacts:
+    paths:
+      - audit-output.txt
+    expire_in: 1 week
+    when: always
+  only:
+    - main
+    - master
+    - merge_requests
+
+# ==========================================
+# BUILD STAGE
+# ==========================================
+
 build:
   stage: build
   image: oven/bun:1
@@ -32,7 +66,10 @@ build:
     - main
     - master
 
-# Deploy to GitLab Pages
+# ==========================================
+# DEPLOY STAGE
+# ==========================================
+
 deploy:
   stage: deploy
   image: alpine:latest
