@@ -1,0 +1,86 @@
+---
+title: 'DNS Server in Rust'
+description: 'A minimal DNS server implementation in Rust that demonstrates the fundamentals of the DNS protocol - packet parsing, recursive resolution, and UDP socket handling'
+techStack: ['Rust', 'Networking', 'DNS Protocol', 'UDP', 'Binary Parsing']
+repoUrl: 'https://github.com/HeyItWorked/dns-server-rust'
+featured: true
+type: 'personal'
+---
+
+## Project Overview
+
+A from-scratch DNS server implementation in Rust that handles DNS query resolution at the protocol level. This project demystifies how DNS works by implementing packet parsing, header construction, and recursive resolution without relying on external DNS libraries.
+
+## Key Features
+
+### DNS Protocol Implementation
+- Full DNS packet parsing and construction
+- Support for A, AAAA, CNAME, and NS record types
+- DNS header flag manipulation (QR, OPCODE, RCODE)
+- Question and resource record encoding/decoding
+
+### UDP Socket Handling
+- Custom UDP server implementation
+- Request/response matching via transaction IDs
+- Timeout and retry logic for reliability
+
+### Recursive Resolution
+- Root server querying
+- Iterative resolution following referrals
+- CNAME chain following
+- Response caching for performance
+
+## Technical Implementation
+
+### Core Components
+
+**DNS Packet Structure**
+```rust
+struct DnsHeader {
+    id: u16,
+    flags: u16,
+    questions: u16,
+    answer_rrs: u16,
+    authority_rrs: u16,
+    additional_rrs: u16,
+}
+```
+
+**Label Encoding**
+- DNS name compression support
+- Pointer following for compressed labels
+- Proper length-prefixed encoding
+
+### Technologies Used
+- **Rust**: Memory-safe systems programming
+- **Tokio**: Async runtime for UDP handling
+- **Nom** (optional): Parser combinators for binary parsing
+
+## Learning Outcomes
+
+### DNS Protocol Deep Dive
+- Understood binary DNS packet format
+- Learned about the distributed nature of DNS
+- Implemented compression pointer chasing
+- Gained appreciation for protocol design decisions
+
+### Rust Skills
+- Low-level binary data manipulation
+- Bitwise operations for flag handling
+- UDP socket programming
+- Error handling in network protocols
+- Zero-copy parsing where possible
+
+### Networking Concepts
+- UDP vs TCP for DNS
+- Root server hierarchy
+- DNS caching and TTL
+- Recursion vs iteration
+
+## Why This Project Matters
+
+Most developers use DNS daily but have no idea how it actually works under the hood. Building a DNS server from scratch:
+- Demystifies a critical internet infrastructure component
+- Demonstrates ability to implement network protocols
+- Shows comfort with low-level binary data
+- Proves Rust competency for systems programming

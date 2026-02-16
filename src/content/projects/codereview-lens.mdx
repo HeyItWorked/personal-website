@@ -1,0 +1,77 @@
+---
+title: 'CodeReview Lens'
+description: 'AI-powered code review mentoring tool generating Socratic questions from GitHub PR diffs to guide developer learning through self-reflection'
+techStack: ['Java 21', 'Spring Boot 3.3', 'PostgreSQL 16', 'Redis 7', 'Docker', 'GitHub Actions', 'Testcontainers']
+repoUrl: 'https://github.com/HeyItWorked/codereview-lens'
+featured: true
+type: 'personal'
+---
+
+## Project Overview
+
+CodeReview Lens is an AI-powered mentoring tool designed to help developers improve their code through guided learning. Rather than providing direct corrections, it generates Socratic questions from GitHub PR diffs, helping developers learn through guided self-reflection.
+
+## Architecture
+
+Clean modular architecture with modern Java best practices:
+
+**Data Flow**: GitHub PR diffs → CodeReview Lens API → AI Model (future) → Socratic Questions
+
+### Modules
+- **Configuration**: Application setup and dependency injection
+- **REST Controllers**: API endpoints for PR submission and job status
+- **Domain Entities**: Core business objects
+- **Data Repositories**: Database access layer
+- **Business Services**:
+  - GitHub integration
+  - Diff parsing
+  - Async analysis processing
+- **Error Handling**: Comprehensive exception management
+
+## Key Features
+
+### GitHub Integration
+- Pull request diff extraction
+- Automated PR analysis workflow
+- Async job processing for scalability
+
+### Socratic Learning Approach
+- Question generation instead of direct corrections
+- Promotes developer critical thinking
+- Encourages self-guided improvement
+
+### Modern Java Stack
+- Java 21 with virtual threads for efficient concurrency
+- Spring Boot 3.3 for rapid development
+- Redis caching for performance optimization
+
+## Technical Implementation
+
+### Technologies Used
+- **Java 21**: Latest LTS with virtual threads
+- **Spring Boot 3.3**: Modern framework for REST APIs
+- **PostgreSQL 16**: Primary database
+- **Redis 7**: Caching layer
+- **Gradle**: Build automation
+- **Docker Compose**: Local development environment
+- **GitHub Actions**: CI/CD pipeline
+- **Testcontainers**: Integration testing
+
+### API Endpoints
+- `POST /analyze`: Submit PR for analysis
+- `GET /status/{jobId}`: Check analysis job status
+
+## Architecture Highlights
+
+1. **Async Processing**: Non-blocking analysis jobs for better scalability
+2. **Clean Separation**: Well-defined layers for maintainability
+3. **Integration Testing**: Testcontainers for realistic test scenarios
+4. **Caching Strategy**: Redis for frequently accessed data
+5. **Modern Concurrency**: Virtual threads for efficient resource utilization
+
+## Future Enhancements
+
+- AI model integration for question generation
+- Support for multiple programming languages
+- Team analytics and learning metrics
+- Integration with popular code review platforms

@@ -1,0 +1,66 @@
+---
+title: 'Social Sentiment Pipeline'
+description: 'End-to-end data engineering pipeline extracting Reddit posts/comments, performing sentiment analysis, and storing results with visualization dashboard'
+techStack: ['Python', 'PRAW', 'VADER', 'PostgreSQL', 'Pandas', 'Pydantic', 'Streamlit']
+repoUrl: 'https://github.com/HeyItWorked/social-sentiment-pipeline'
+featured: true
+type: 'personal'
+---
+
+## Project Overview
+
+A comprehensive data engineering pipeline that extracts Reddit posts and comments based on keyword searches, analyzes their sentiment using VADER, and stores structured results in PostgreSQL with a Streamlit dashboard for visualization.
+
+## Architecture
+
+The pipeline follows a modular design with distinct stages:
+1. **Ingestion**: Extract posts and comments from Reddit using PRAW
+2. **Processing**: Analyze sentiment and clean text data
+3. **Storage**: Store structured results in PostgreSQL
+4. **Visualization**: Interactive Streamlit dashboard for insights
+
+## Key Features
+
+### Data Collection
+- Reddit API integration via PRAW
+- Keyword-based search queries
+- Graceful handling of API rate limiting
+- Focus on comment analysis for better accuracy
+
+### Text Processing
+- Multi-step text cleaning pipeline
+- URL and markdown removal
+- Noise reduction for accurate sentiment analysis
+
+### Sentiment Analysis
+- VADER sentiment scoring
+- Positive, negative, neutral, and compound metrics
+- Real-time analysis pipeline
+
+### Data Storage
+- PostgreSQL database with three interconnected tables
+- Tracks search queries, posts, and analyzed comments
+- Detailed sentiment metrics storage
+
+## Technical Implementation
+
+### Technologies Used
+- **Python 3.9+**: Core development language
+- **PRAW**: Python Reddit API Wrapper for data collection
+- **VADER**: Sentiment analysis engine
+- **PostgreSQL**: Relational database for structured storage
+- **Pandas**: Data manipulation and processing
+- **Pydantic**: Data validation and schema enforcement
+- **Streamlit**: Interactive dashboard and visualization
+
+## Challenges Overcome
+
+1. **Data Quality**: Shifted from analyzing top posts to top comments after discovering posts yielded noisy, meaningless results
+2. **API Management**: Implemented graceful handling of Reddit API rate limiting
+3. **Text Cleaning**: Built robust multi-step pipeline to handle various text formats and noise
+
+## Impact
+
+- Built complete data engineering lifecycle from API to visualization
+- Achieved accurate sentiment analysis through iterative improvement
+- Created production-ready database schema for scalable storage

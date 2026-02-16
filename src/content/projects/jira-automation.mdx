@@ -1,0 +1,79 @@
+---
+title: 'Jira Automation CLI'
+description: 'Jira workflow automation and metrics reporting CLI tool - automates ticket transitions, generates sprint reports, and extracts actionable insights from project data'
+techStack: ['Python', 'Jira API', 'CLI', 'Pandas', 'REST API']
+repoUrl: 'https://github.com/HeyItWorked/jira-automation'
+featured: false
+type: 'personal'
+---
+
+## Project Overview
+
+A command-line tool that automates repetitive Jira workflows and generates actionable metrics reports. Built to streamline project management tasks and provide data-driven insights into team velocity, sprint health, and ticket lifecycle patterns.
+
+## Key Features
+
+### Workflow Automation
+- Bulk ticket transitions (e.g., move all Done tickets to Closed)
+- Automated sprint creation and assignment
+- Label synchronization across projects
+- Custom field updates based on rules
+
+### Metrics & Reporting
+- Sprint velocity tracking and trend analysis
+- Cycle time calculation (creation → resolution)
+- Workload distribution across team members
+- Burndown/burnup chart data generation
+- Blocker and dependency analysis
+
+### Data Export
+- CSV export for Excel analysis
+- JSON output for pipeline integration
+- Formatted markdown reports for standups
+- Custom report templates
+
+## Technical Implementation
+
+### Technologies Used
+- **Python 3.10+**: Core development
+- **Jira REST API v3**: Issue and project data access
+- **Pandas**: Data aggregation and analysis
+- **Click**: CLI framework for command structure
+- **Rich**: Terminal formatting and progress bars
+- **python-dotenv**: Configuration management
+
+### CLI Commands
+```bash
+# Transition tickets
+jira-auto transition --from "In Progress" --to "Done" --project PROJ
+
+# Generate sprint report
+jira-auto report sprint --sprint "Sprint 23" --format markdown
+
+# Export metrics
+jira-auto export velocity --last 6 --output velocity.csv
+
+# Analyze cycle time
+jira-auto metrics cycle-time --project PROJ --days 30
+```
+
+### Architecture
+1. **API Client**: Jira REST API wrapper with rate limiting
+2. **Data Models**: Pydantic models for Jira entities
+3. **Transform Layer**: Data cleaning and enrichment
+4. **Analysis Engine**: Metrics calculation
+5. **CLI Interface**: Click commands with Rich output
+
+## Real-World Impact
+
+- Reduced sprint closeout time from 30 minutes to 2 minutes
+- Identified bottlenecks causing 20% longer cycle times
+- Automated weekly status report generation
+- Enabled data-driven sprint planning decisions
+
+## Challenges
+
+1. **API Rate Limiting**: Implemented exponential backoff and request batching
+2. **JQL Complexity**: Built query builder for common filter patterns
+3. **Data Consistency**: Handled timezone issues and custom field variations
+4. **Authentication**: Supported both API tokens and OAuth flows

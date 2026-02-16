@@ -1,0 +1,88 @@
+---
+title: 'HoopAnalytics'
+description: 'Data mining and regression analysis of NBA team performance metrics - statistical modeling to identify key performance indicators and predict game outcomes'
+techStack: ['Python', 'Pandas', 'Scikit-learn', 'Matplotlib', 'NBA API']
+repoUrl: 'https://github.com/HeyItWorked/HoopAnalytics'
+featured: false
+type: 'personal'
+---
+
+## Project Overview
+
+A data science project analyzing NBA team performance metrics to identify key drivers of success. Uses statistical regression models to quantify the relationship between various performance indicators (shooting efficiency, turnovers, pace) and winning percentage.
+
+## Key Features
+
+### Data Collection
+- Automated data retrieval from NBA API
+- Historical season data spanning 10+ years
+- Team and player-level aggregations
+- Play-by-play data for advanced metrics
+
+### Exploratory Analysis
+- Correlation matrices for performance factors
+- Distribution analysis of key metrics
+- Season-over-season trend visualization
+- Team clustering by play style
+
+### Predictive Modeling
+- Multiple linear regression for win prediction
+- Feature importance analysis
+- Model validation with train/test splits
+- Residual analysis and diagnostics
+
+### Visualization
+- Interactive team comparison charts
+- Shot efficiency heat maps
+- Win probability graphs
+- Performance radar charts
+
+## Technical Implementation
+
+### Technologies Used
+- **Python 3.9+**: Data analysis and modeling
+- **Pandas**: Data manipulation and cleaning
+- **NumPy**: Numerical computations
+- **Scikit-learn**: Regression modeling and validation
+- **Matplotlib/Seaborn**: Statistical visualizations
+- **NBA_API**: Official NBA data access
+- **Jupyter Notebooks**: Exploratory analysis
+
+### Key Metrics Analyzed
+| Metric | Description | Correlation with Wins |
+|--------|-------------|----------------------|
+| eFG% | Effective Field Goal % | 0.42 |
+| TOV% | Turnover Rate | -0.38 |
+| ORB% | Offensive Rebound % | 0.21 |
+| Pace | Possessions per Game | 0.05 |
+| TS% | True Shooting % | 0.45 |
+
+### Model Performance
+- **R² Score**: 0.78 (explains 78% of win variance)
+- **RMSE**: 4.2 wins over 82-game season
+- **Cross-validation**: 5-fold CV score 0.76
+
+## Key Findings
+
+1. **Shooting Efficiency Matters Most**: True shooting percentage is the strongest predictor of team success
+2. **Turnovers Kill**: Teams with high turnover rates consistently underperform regardless of other strengths
+3. **Pace is Neutral**: Fast vs slow pace doesn't correlate with winning; efficiency does
+4. **Defense Wins**: Defensive rating explains more variance than offensive rating
+
+## Learnings
+
+### Data Science Skills
+- Feature engineering from raw game data
+- Handling multicollinearity in regression
+- Proper train/test splitting for time-series data
+- Interpreting regression coefficients in context
+
+### Domain Knowledge
+- Deep understanding of advanced NBA statistics
+- Insight into modern basketball analytics
+- Appreciation for how data shapes team strategy
+
+### Technical Growth
+- Working with real-world messy API data
+- Building reproducible analysis pipelines
+- Communicating statistical findings clearly

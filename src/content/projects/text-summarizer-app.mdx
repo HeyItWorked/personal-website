@@ -1,0 +1,66 @@
+---
+title: 'Text Summarizer App'
+description: 'AI-powered text summarizer with file upload, analytics dashboard, and advanced LLM controls - built with Streamlit, OpenAI GPT-4, and LangChain'
+techStack: ['Python', 'Streamlit', 'OpenAI GPT-4', 'LangChain', 'Pandas']
+repoUrl: 'https://github.com/HeyItWorked/text-summarizer-app'
+featured: true
+type: 'personal'
+---
+
+## Project Overview
+
+An AI-powered text summarization application that leverages OpenAI's GPT-4 through LangChain to provide intelligent document summaries. Features a Streamlit-based UI with file upload capabilities, analytics dashboard, and configurable LLM parameters for fine-tuned outputs.
+
+## Key Features
+
+### File Upload & Processing
+- Support for multiple document formats (TXT, PDF, DOCX)
+- Large file handling with chunked processing
+- Text extraction and preprocessing pipeline
+
+### AI-Powered Summarization
+- GPT-4 integration via LangChain
+- Configurable summary length and style
+- Multiple summarization modes (extractive, abstractive, bullet points)
+- Token usage tracking and cost estimation
+
+### Analytics Dashboard
+- Summary statistics (compression ratio, reading time saved)
+- Token usage history and trends
+- Export functionality for summaries and reports
+
+### Advanced Controls
+- Temperature adjustment for creativity control
+- Max token limits
+- Custom prompt templates
+- Model selection (GPT-3.5 vs GPT-4)
+
+## Technical Implementation
+
+### Technologies Used
+- **Python 3.11+**: Core development language
+- **Streamlit**: Interactive web interface
+- **OpenAI GPT-4**: Language model for summarization
+- **LangChain**: LLM orchestration and chain management
+- **Pandas**: Data processing and analytics
+- **python-docx/PyPDF2**: Document parsing
+
+### Architecture
+1. **Document Ingestion**: File upload and text extraction
+2. **Preprocessing**: Text cleaning and chunking
+3. **LLM Chain**: LangChain pipeline for summarization
+4. **Analytics Engine**: Metrics calculation and history tracking
+5. **Streamlit UI**: Interactive dashboard and controls
+
+## Challenges & Solutions
+
+1. **Large File Handling**: Implemented chunked processing to handle documents exceeding token limits
+2. **Cost Management**: Built token tracking to monitor API usage and estimate costs
+3. **UI Responsiveness**: Added progress indicators and async processing for better UX
+
+## Learnings
+
+- LangChain's chain composition for complex LLM workflows
+- Streamlit's session state management for multi-page apps
+- Balancing LLM quality vs cost (GPT-4 vs GPT-3.5 tradeoffs)
+- Document parsing edge cases and encoding issues
