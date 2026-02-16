@@ -1,0 +1,20 @@
+---
+import BentoCard from "../BentoCard.astro"
+---
+
+<BentoCard index={6} className="col-span-1 flex flex-col justify-center">
+  <svg
+    class="mb-3 h-6 w-6 text-emerald-400/40"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151C7.563 6.068 6 8.789 6 11h4v10H0z" />
+  </svg>
+  <blockquote class="text-sm italic leading-relaxed text-muted-foreground">
+    'All failed companies are the same: they failed to escape competition.'
+  </blockquote>
+  <cite class="mt-3 block font-mono text-xs text-muted-foreground/60 not-italic">
+    — Peter Thiel
+  </cite>
+</BentoCard>
