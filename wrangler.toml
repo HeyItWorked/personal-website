@@ -1,0 +1,30 @@
+# Cloudflare Pages Configuration
+# This file is optional for Pages deployments but useful for local development
+# and direct CLI deployments with Wrangler
+
+name = "personal-website"
+compatibility_date = "2024-01-01"
+
+# Pages-specific configuration
+pages_build_output_dir = "dist"
+
+# If you add environment variables later, uncomment and configure:
+# [env.production.vars]
+# API_KEY = "your-production-key"
+
+# [env.preview.vars]
+# API_KEY = "your-preview-key"
+
+# If you need custom headers, add them here:
+# [[headers]]
+# for = "/*"
+# [headers.values]
+# X-Frame-Options = "DENY"
+# X-Content-Type-Options = "nosniff"
+# Referrer-Policy = "strict-origin-when-cross-origin"
+
+# If you need redirects:
+# [[redirects]]
+# from = "/old-page"
+# to = "/new-page"
+# status = 301
