@@ -1,6 +1,5 @@
 # Cloudflare Pages Configuration
-# This file is optional for Pages deployments but useful for local development
-# and direct CLI deployments with Wrangler
+# This file configures security headers and deployment settings
 
 name = "personal-website"
 compatibility_date = "2024-01-01"
@@ -8,23 +7,55 @@ compatibility_date = "2024-01-01"
 # Pages-specific configuration
 pages_build_output_dir = "dist"
 
-# If you add environment variables later, uncomment and configure:
+# ==========================================
+# SECURITY HEADERS - HIGH PRIORITY
+# These headers protect against common attacks
+# ==========================================
+
+[[headers]]
+for = "/*"
+[headers.values]
+# Prevent clickjacking attacks
+X-Frame-Options = "DENY"
+
+# Prevent MIME type sniffing
+X-Content-Type-Options = "nosniff"
+
+# Control referrer information
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Limit browser features
+Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=()"
+
+# Enforce HTTPS (HSTS) - 1 year, include subdomains, preload
+Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Content Security Policy - restricts what resources can load
+# Default: only same-origin
+# Scripts: same-origin + inline (required for Astro hydration)
+# Styles: same-origin + inline + Google Fonts
+# Fonts: same-origin + Google Fonts CDN
+# Images: same-origin + data URIs + any HTTPS
+# Connect: same-origin only
+Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+
+# ==========================================
+# REDIRECTS
+# ==========================================
+
+# Redirect www to non-www (if using custom domain)
+# [[redirects]]
+# from = "https://www.your-domain.com/*"
+# to = "https://your-domain.com/:splat"
+# status = 301
+
+# ==========================================
+# ENVIRONMENT VARIABLES
+# Uncomment and configure if needed
+# ==========================================
+
 # [env.production.vars]
 # API_KEY = "your-production-key"
 
 # [env.preview.vars]
 # API_KEY = "your-preview-key"
-
-# If you need custom headers, add them here:
-# [[headers]]
-# for = "/*"
-# [headers.values]
-# X-Frame-Options = "DENY"
-# X-Content-Type-Options = "nosniff"
-# Referrer-Policy = "strict-origin-when-cross-origin"
-
-# If you need redirects:
-# [[redirects]]
-# from = "/old-page"
-# to = "/new-page"
-# status = 301
